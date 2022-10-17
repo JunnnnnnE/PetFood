@@ -1,0 +1,35 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `t_petfood_user`;
+DROP TABLE IF EXISTS `t_petfood_board`;
+DROP TABLE IF EXISTS `t_petfood_pet`;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE `t_petfood_user` (
+    `uesrName` varchar(50) NOT NULL,
+    `userId` varchar(50) NOT NULL,
+    `userPwd` varchar(50) NOT NULL,
+    `userNickname` varchar(50) NOT NULL,
+    `userEmail` varchar(50) NOT NULL,
+    PRIMARY KEY (`userId`)
+);
+
+CREATE TABLE `t_petfood_board` (
+    `articleNo` INT(100) NOT NULL,
+    `Title` varchar(100) NOT NULL,
+    `Content` varchar(4000) NOT NULL,
+    `imageFileName` varchar(100) NOT NULL,
+    `writeDate` datetime NOT NULL,
+    `writeId` varchar(50) NOT NULL,
+    PRIMARY KEY (`articleNo`)
+);
+
+CREATE TABLE `t_petfood_pet` (
+    `userId` varchar(50) NOT NULL,
+    `petName` varchar(50) NOT NULL,
+    `petAge` varchar(10) NOT NULL,
+    `petKind` varchar(50) NOT NULL,
+    `petProfile` varchar(50) NOT NULL
+);
+
+ALTER TABLE `t_petfood_board` ADD FOREIGN KEY (`writeId`) REFERENCES `t_petfood_user`(`userId`);
+ALTER TABLE `t_petfood_pet` ADD FOREIGN KEY (`userId`) REFERENCES `t_petfood_user`(`userId`);
