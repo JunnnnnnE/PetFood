@@ -1,0 +1,26 @@
+show databases;
+use petfood;
+show tables;
+
+ALTER TABLE t_board CONVERT TO CHARACTER SET utf8;
+
+create table t_board (
+	articleNo int(100) primary key not null,
+	title varchar (100) not null,
+	content varchar (4000) not null,
+	imageFileName varchar(100),
+	writedate datetime default (current_date),
+	id varchar(50)
+);
+
+insert into t_board values(1, '1제목입니다','1내용입니다', 'index.jpg',  sysdate(), 'hong');
+insert into t_board values(2, '2제목입니다','2내용입니다', 'index.jpg',  sysdate(), 'hong');
+insert into t_board values(3, '3제목입니다','3내용입니다', 'index.jpg',  sysdate(), 'kim');
+insert into t_board values(4, '4제목입니다','4내용입니다', 'index.jpg',  sysdate(), 'lee');
+select * from t_board order by articleNO desc;
+
+select * from t_board;
+delete FROM t_board WHERE articleNo = 1;
+delete FROM t_board WHERE articleNo = 2;
+delete FROM t_board WHERE articleNo = 3;
+delete FROM t_board WHERE articleNo = 4;
