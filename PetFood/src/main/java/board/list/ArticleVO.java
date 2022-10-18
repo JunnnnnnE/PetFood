@@ -6,23 +6,21 @@ import java.sql.Date;
 
 public class ArticleVO {
 	private int articleNO;
-	private int parentNO;
 	private String title;
 	private String content;
 	private String imageFileName;
-	private String id;
 	private Date writeDate;
+	private String id;
 	
 	public ArticleVO() {
 		
 	}
 
 
-	public ArticleVO(int articleNO, int parentNO, String title, String content, String imageFileName,
+	public ArticleVO(int articleNO, String title, String content, String imageFileName,
 			String id) {
 		super();
 		this.articleNO = articleNO;
-		this.parentNO = parentNO;
 		this.title = title;
 		this.content = content;
 		this.imageFileName = imageFileName;
@@ -37,17 +35,6 @@ public class ArticleVO {
 	public void setArticleNO(int articleNO) {
 		this.articleNO = articleNO;
 	}
-
-
-	public int getParentNO() {
-		return parentNO;
-	}
-
-
-	public void setParentNO(int parentNO) {
-		this.parentNO = parentNO;
-	}
-
 
 	public String getTitle() {
 		return title;
