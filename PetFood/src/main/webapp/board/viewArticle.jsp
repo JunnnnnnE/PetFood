@@ -117,6 +117,15 @@
 	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
 	   </td>   
   </tr>
+  <tr>
+   <td width="150" align="center" bgcolor="#FF9933">
+      조회수
+   </td>
+   <td >
+    <input type="text"  value="${article.count }"  disabled />
+    <input type="hidden" name="count" value="${article.count}"  />
+   </td>
+  </tr>
   <tr   id="tr_btn_modify"  >
 	   <td colspan="2"   align="center" >
 	       <input type=button value="수정하기"   onClick="fn_modify_article(frmArticle)"  >

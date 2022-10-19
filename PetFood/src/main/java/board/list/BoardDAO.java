@@ -83,7 +83,7 @@ public class BoardDAO {
 			String content = article.getContent();
 			String id = article.getId();
 			String imageFileName = article.getImageFileName();
-			String query = "INSERT INTO t_board (articleNO, title, content, imageFileName, id)"
+			String query = "INSERT INTO t_petfood_board (articleNO, title, content, imageFileName, id)"
 					+ " VALUES (?, ? ,?, ?, ?)";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
@@ -105,7 +105,7 @@ public class BoardDAO {
 		ArticleVO article=new ArticleVO();
 		try{
 			conn = dataFactory.getConnection();
-			String query ="select articleNO,title,content, imageFileName,id,writeDate"
+			String query ="select articleNO,title,content, imageFileName,id,writeDate, count"
 				                     +" from t_petfood_board" 
 				                     +" where articleNO=?";
 			System.out.println(query);
@@ -119,13 +119,17 @@ public class BoardDAO {
 		    String imageFileName = rs.getString("imageFileName"); 
 			String id = rs.getString("id");
 			Date writeDate = rs.getDate("writeDate");
-	
+			int count = rs.getInt("count");
+			
+			updateArticleCount(count, _articleNO); 
+			
 			article.setArticleNO(_articleNO);
 			article.setTitle(title);
 			article.setContent(content);
 			article.setImageFileName(imageFileName);
 			article.setId(id);
 			article.setWriteDate(writeDate);
+			article.setCount(count+1);
 			rs.close();
 			pstmt.close();
 			conn.close();
@@ -133,6 +137,24 @@ public class BoardDAO {
 			e.printStackTrace();	
 		}
 			return article;
+	}
+
+	public void updateArticleCount(int count, int articleNO) {
+		try {
+			conn = dataFactory.getConnection();
+			String query = "update t_petfood_board  set count=?";
+			query += " where articleNO=?";
+			
+			System.out.println(query);
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, count+1);
+			pstmt.setInt(2, articleNO);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateArticle(ArticleVO article) {
@@ -142,7 +164,7 @@ public class BoardDAO {
 		String imageFileName = article.getImageFileName();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "update t_board  set title=?,content=?";
+			String query = "update t_petfood_board set title=?,content=?";
 			if (imageFileName != null && imageFileName.length() != 0) {
 				query += ",imageFileName=?";
 			}

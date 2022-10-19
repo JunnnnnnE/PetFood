@@ -11,6 +11,7 @@ public class ArticleVO {
 	private String imageFileName;
 	private Date writeDate;
 	private String id;
+	private int count;
 	
 	public ArticleVO() {
 		
@@ -89,6 +90,16 @@ public class ArticleVO {
 
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 	
 	
