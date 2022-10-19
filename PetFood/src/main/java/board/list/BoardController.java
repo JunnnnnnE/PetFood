@@ -57,20 +57,22 @@ public class BoardController extends HttpServlet {
 				articlesList = boardService.listArticles();
 				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
-			} else if (action.equals("/listArticles.do")) {
+			} 
+			else if (action.equals("/listArticles.do")) {
 				articlesList = boardService.listArticles();
 				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
-			} else if (action.equals("/articleForm.do")) {
+			} 
+			else if (action.equals("/articleForm.do")) {
 				nextPage = "/board/articleForm.jsp";
-			} else if (action.equals("/addArticle.do")) {
+			} 
+			else if (action.equals("/addArticle.do")) {
 				int articleNO = 0;
 				Map<String, String> articleMap = upload(request, response);
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
 
-				articleVO.setParentNO(0);
 				articleVO.setId("hong");
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
@@ -90,19 +92,20 @@ public class BoardController extends HttpServlet {
 						 +"/PetFoodBoard/listArticles.do';"
 				         +"</script>");
 				return;
-			} else if(action.equals("/viewArticle.do")){
+			} 
+			else if(action.equals("/viewArticle.do")){
 				String articleNO = request.getParameter("articleNO");
 				articleVO=boardService.viewArticle(Integer.parseInt(articleNO));
 				request.setAttribute("article",articleVO);
 				nextPage = "/board/viewArticle.jsp";
-			} else if (action.equals("/modArticle.do")) {
+			} 
+			else if (action.equals("/modArticle.do")) {
 				Map<String, String> articleMap = upload(request, response);
 				int articleNO = Integer.parseInt(articleMap.get("articleNO"));
 				articleVO.setArticleNO(articleNO);
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
-				articleVO.setParentNO(0);
 				articleVO.setId("hong");
 				articleVO.setTitle(title);
 				articleVO.setContent(content);

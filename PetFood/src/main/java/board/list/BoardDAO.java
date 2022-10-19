@@ -30,20 +30,18 @@ public class BoardDAO {
 		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT articleNO,parentNO,title,content,id,writeDate" + " from t_board";
+			String query = "SELECT articleNO,title,content,id,writeDate" + " from t_petfood_board";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				int articleNO = rs.getInt("articleNO");
-				int parentNO = rs.getInt("parentNO");
 				String title = rs.getString("title");
 				String content = rs.getString("content");
 				String id = rs.getString("id");
 				Date writeDate = rs.getDate("writeDate");
 				ArticleVO article = new ArticleVO();
 				article.setArticleNO(articleNO);
-				article.setParentNO(parentNO);
 				article.setTitle(title);
 				article.setContent(content);
 				article.setId(id);
@@ -62,7 +60,7 @@ public class BoardDAO {
 	private int getNewArticleNO() {
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT  max(articleNO) from t_board ";
+			String query = "SELECT  max(articleNO) from t_petfood_board ";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery(query);
@@ -81,21 +79,19 @@ public class BoardDAO {
 		int articleNO = getNewArticleNO();
 		try {
 			conn = dataFactory.getConnection();
-			int parentNO = article.getParentNO();
 			String title = article.getTitle();
 			String content = article.getContent();
 			String id = article.getId();
 			String imageFileName = article.getImageFileName();
-			String query = "INSERT INTO t_board (articleNO, parentNO, title, content, imageFileName, id)"
-					+ " VALUES (?, ? ,?, ?, ?, ?)";
+			String query = "INSERT INTO t_board (articleNO, title, content, imageFileName, id)"
+					+ " VALUES (?, ? ,?, ?, ?)";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, articleNO);
-			pstmt.setInt(2, parentNO);
-			pstmt.setString(3, title);
-			pstmt.setString(4, content);
-			pstmt.setString(5, imageFileName);
-			pstmt.setString(6, id);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, imageFileName);
+			pstmt.setString(5, id);
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -109,8 +105,8 @@ public class BoardDAO {
 		ArticleVO article=new ArticleVO();
 		try{
 			conn = dataFactory.getConnection();
-			String query ="select articleNO,parentNO,title,content, imageFileName,id,writeDate"
-				                     +" from t_board" 
+			String query ="select articleNO,title,content, imageFileName,id,writeDate"
+				                     +" from t_petfood_board" 
 				                     +" where articleNO=?";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
@@ -118,7 +114,6 @@ public class BoardDAO {
 			ResultSet rs =pstmt.executeQuery();
 			rs.next();
 			int _articleNO =rs.getInt("articleNO");
-			int parentNO=rs.getInt("parentNO");
 			String title = rs.getString("title");
 			String content =rs.getString("content");
 		    String imageFileName = rs.getString("imageFileName"); 
@@ -126,7 +121,6 @@ public class BoardDAO {
 			Date writeDate = rs.getDate("writeDate");
 	
 			article.setArticleNO(_articleNO);
-			article.setParentNO (parentNO);
 			article.setTitle(title);
 			article.setContent(content);
 			article.setImageFileName(imageFileName);
@@ -174,7 +168,7 @@ public class BoardDAO {
 	public void deleteArticle(int  articleNO) {
 		try {
 			conn = dataFactory.getConnection();
-			String query = "DELETE FROM t_board WHERE articleNO=?";
+			String query = "DELETE FROM t_petfood_board WHERE articleNO=?";
 //			query += " WHERE articleNO in (";
 //			query += "  SELECT articleNO FROM  t_board ";
 //			query += " START WITH articleNO = ?";
@@ -194,9 +188,9 @@ public class BoardDAO {
 		List<Integer> articleNOList = new ArrayList<Integer>();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT articleNO FROM  t_board  ";
-			query += " START WITH articleNO = ?";
-			query += " CONNECT BY PRIOR  articleNO = parentNO";
+			String query = "SELECT articleNO FROM  t_petfood_board  ";
+//			query += " START WITH articleNO = ?";
+//			query += " CONNECT BY PRIOR  articleNO = parentNO";
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, articleNO);
