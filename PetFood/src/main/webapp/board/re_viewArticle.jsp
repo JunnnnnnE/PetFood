@@ -25,12 +25,12 @@
 	    obj.submit();
      }
  
-	 function fn_enable1(obj){
-		 document.getElementById("i_title").disabled=false;
-		 document.getElementById("i_content").disabled=false;
-		 document.getElementById("i_imageFileName").disabled=false;
-		 document.getElementById("tr_btn_modify").style.display="block";
-		 document.getElementById("tr_btn").style.display="none";
+	 function re_fn_enable1(obj){
+		 document.getElementById("i_title_re").disabled=false;
+		 document.getElementById("i_content_re").disabled=false;
+		 document.getElementById("i_imageFileName_re").disabled=false;
+		 document.getElementById("tr_btn_modify_re").style.display="block";
+		 document.getElementById("tr_btn_re").style.display="none";
 	 }
 	 
 	 function fn_modify_article(obj){
@@ -94,7 +94,7 @@
    </td>
 
    <td>
-    <input type=text value="${article.title }"  name="title"  id="i_title" disabled />
+    <input type=text value="${article.title }"  name="title"  id="i_title_re" disabled />
    </td>      
   </tr>
   <tr>
@@ -119,7 +119,7 @@
   </tr>  
   <tr>
     <td>
-       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
+       <input  type="file"  name="imageFileName " id="i_imageFileName_re"   disabled   onchange="readURL(this);"   />
     </td>
   </tr>
  </c:if>
@@ -140,7 +140,7 @@
     
   <tr  id="tr_btn"    >
    <td colspan=2 align=center>
-	    <input type=button value="수정하기" onClick="fn_enable1(this.form); alert('왜안돼');">
+	    <input type=button value="수정하기" onClick="re_fn_enable(this.form);">
 	    <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/recipe/removeArticle.do', ${article.articleNO})">
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
    </td>
