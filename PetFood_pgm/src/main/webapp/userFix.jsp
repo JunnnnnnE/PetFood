@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.sql.Connection" %>
+<%@page import="java.sql.PreparedStatement" %>
+<%@page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
 <script src="js/jquery-3.6.0.min.js"></script>
-<meta charset="UTF-8">
-<title>회원가입</title>
 <style>
 /*reset*/
 body,div,h3,p,strong,form,fildset,legend,label,input,select,option,span,textarea{
@@ -258,7 +262,7 @@ function characterCheck(obj){
 		
 		$("#next").prop("disabled","disabled");
 		$("#next").attr("class","btn_del");
-		$(".join2").css("display","none");
+		$(".join3").css("display","none");
 
 		$(".userPwdCk").keyup(function() {
 			var pwd1 = $("#userPwd1").val();
@@ -275,13 +279,12 @@ function characterCheck(obj){
 						$("#next").removeClass("btn_m");
 						$("#next").addClass("btn_del");
 						$("#next").prop("disabled","disabled");
-						$(".btn_del").attr("title","약관 동의를 확인해주세요.");
 					}
 					else if(listVar == 1){ // 동의함
 						$("#next").removeClass("btn_del");
 						$("#next").addClass("btn_m");
 						$("#next").prop("disabled","");
-						$(".btn_m").attr("title","회원가입 완료하기");
+						$(".btn_m").attr("title","회원정보 변경하기");
 					}
 					}
 					else if(sw==0){
@@ -312,13 +315,12 @@ function characterCheck(obj){
 						$("#next").removeClass("btn_m");
 						$("#next").addClass("btn_del");
 						$("#next").prop("disabled","disabled");
-						$(".btn_del").attr("title","약관 동의를 확인해주세요.");
 					}
 					else if(listVar == 1){ // 동의함
 						$("#next").removeClass("btn_del");
 						$("#next").addClass("btn_m");
 						$("#next").prop("disabled","");
-						$(".btn_m").attr("title","회원가입 완료하기");
+						$(".btn_m").attr("title","회원정보 변경하기");
 					}
 				} else {
 					$("#next").removeClass("btn_m");
@@ -367,47 +369,107 @@ function characterCheck(obj){
 		});
 	});
 </script>
+<meta charset="UTF-8">
+<title>회원 정보 수정하기</title>
 </head>
 <body>
+	<%
+		boolean sw=false;
+	
+		String id = (String)session.getAttribute("s_userId");
+		String pwd = "";
+		String name = "";
+		String nickname = "";
+		String date ="";
+		String email ="";
+		
+		String petName="", petAge="", petKind="";
+	
+			//db사용 준비
+			Class.forName("org.mariadb.jdbc.Driver"); 
+				
+			//db연결
+			Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","123456");  
+		
+			//db 값 불러오기
+			PreparedStatement stmt = conn.prepareStatement("select * from t_petfood_user");  
+			ResultSet rs = stmt.executeQuery();
+			PreparedStatement stmt_p = conn.prepareStatement("select * from t_petfood_pet");  
+			ResultSet rs_p = stmt_p.executeQuery();
+			
+			while(rs.next()){
+				if(rs.getString("userId").equals(id)){ //db에서 아이디 찾음
+					sw=false;
+				
+					pwd = rs.getString("userPwd");
+					name = rs.getString("userName");
+					nickname = rs.getString("userNickname");
+					date = rs.getString("joinDate");
+					email = rs.getString("userEmail");
+					
+					while(rs_p.next()){
+					if(rs_p.getString("userId").equals(id)){
+						petName = rs_p.getString("petName");
+						petAge = rs_p.getString("petAge");
+						petKind = rs_p.getString("petKind");
+						break;
+					}
+					}
+				}
+				else{ //db에서 아이디 못찾음
+					sw=true;
+				}
+			}
+			
+			if(sw == true){
+				%>
+				<script>
+				alert("아이디를 찾지 못했습니다.");
+				</script>
+				<%
+			}
+	%>
+	
+	<%=id %>님 안녕하세요
+	
 	<div id="join_cotaier">
-        <h3>회원가입</h3>
+        <h3>회원 정보 변경하기</h3>
         <p class="information"><strong class="point">*</strong> 는 필수입력 항목을 나타냅니다.</p>
         <form action="joinOK.jsp" method="get" id="join">
             <fieldset class="join1">
-                <legend>필수 입력 항목</legend>
-                <p class="inbox"><label for="userName"><strong class="point">*</strong> 이름</label><input type="text" id="userName" name="userName" autocomplete="off" required></p>
-                <p class="inbox"><label for="userNickname"><strong class="point">*</strong> 닉네임</label><input type="text" id="userNickname" name="userNickname" autocomplete="off" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" required></p>
-                <p class="inbox"><label for="userId"><strong class="point">*</strong> 아이디</label><input type="text" id="userId" name="userId" autocomplete="off" required></p>
-                <p class="inbox"><label for="userPwd1"><strong class="point">*</strong> 비밀번호</label><input type="password" class="userPwdCk" id="userPwd1" name="userPwd1" autocomplete="off" required></p>
+                <legend>사용자정보 변경</legend>
+                <p class="inbox"><label for="userName"><strong class="point">*</strong> 이름</label><input type="text" id="userName" name="userName" autocomplete="off" value="<%=name %>" required></p>
+                <p class="inbox"><label for="userNickname"><strong class="point">*</strong> 닉네임</label><input type="text" id="userNickname" name="userNickname" autocomplete="off" onkeyup="characterCheck(this)" onkeydown="characterCheck(this)" value="<%=nickname %>"  required></p>
+                <p class="inbox"><label for="userId"><strong class="point">*</strong> 아이디</label><input type="text" id="userId" name="userId" autocomplete="off" value="<%=id %>" required></p>
+                <p class="inbox"><label for="userPwd1"><strong class="point">*</strong> 비밀번호</label><input type="password" class="userPwdCk" id="userPwd1" name="userPwd1" autocomplete="off"  required></p>
                 <p class="inbox"><label for="userPwd2"><strong class="point">*</strong> 비밀번호 확인</label><input onkeyup="printPwd()" type="password" class="userPwdCk" id="userPwd2" name="userPwd2" autocomplete="off" required></p>
                 <p id="passwordck"></p>
-                <p class="inbox"><label for="userEmail"><strong class="point">*</strong> 이메일</label><input type="text" id="userEmail" name="userEmail" autocomplete="off" required></p>
+                <p class="inbox"><label for="userEmail"><strong class="point">*</strong> 이메일</label><input type="text" id="userEmail" name="userEmail" autocomplete="off" value="<%=email %>" required></p>
                 <p class="textbox"><strong class="piont">주의!</strong> 이메일은 완성형으로 작성해주세요. 잃어버린 정보를 찾는데 사용됩니다.</p>
                 
-                <p id="reallyBox"><label id="really" for="petReally">반려동물이 있으십니까?</label><input type="checkbox" id="petReally" name="petReally"></p>
                 <button id="idck_b" type="button">중복확인</button>
             </fieldset>
             <fieldset class="join2">
             	<legend>반려동물 정보 입력</legend>
-                <p class="inbox"><label for="petName">이름</label><input type="text" id="petName" name="petName" autocomplete="off" ></p>
-                <p class="inbox"><label for="petAge">나이</label><input type="text" id="petAge" name="petAge" autocomplete="off" ></p>
-                <p class="inbox"><label for="petType">품종</label><input type="text" id="petType" name="petType" autocomplete="off" ></p>
+                <p class="inbox"><label for="petName">이름</label><input type="text" id="petName" name="petName" autocomplete="off" value="<%=petName %>" ></p>
+                <p class="inbox"><label for="petAge">나이</label><input type="text" id="petAge" name="petAge" autocomplete="off" value="<%=petAge %>" ></p>
+                <p class="inbox"><label for="petType">품종</label><input type="text" id="petType" name="petType" autocomplete="off" value="<%=petKind %>" ></p>
             </fieldset>
             <fieldset class="join3">
-                <legend>이용약관 동의</legend>
+                <legend>회원정보 변경 하기</legend>
                 <p id="text_wrap">
-                <textarea cols="65" rows="15" readonly>약관
+                <textarea cols="65" rows="15" readonly>
                 </textarea>
                 </p>
                 <p class="box_i">
-                    <input type="radio" class="ckbox" name="agree" id="chk1" value="1">
+                    <input type="radio" class="ckbox" name="agree" id="chk1" value="1" checked>
                     <label for="chk1">동의</label>
-                    <input type="radio" class="ckbox" name="agree" id="chk2" value="2" checked>
+                    <input type="radio" class="ckbox" name="agree" id="chk2" value="2">
                     <label for="chk2">동의안함</label>
                 </p>
             </fieldset>
             <p class="btn">
-                <input class="btn_m" type="submit" id="next" title="필수 입력창을 확인해주세요." value="회원가입하기" >
+                <input class="btn_m" type="submit" id="next" title="필수 입력창을 확인해주세요." value="회원정보변경하기" >
                 <input class="btn_m" type="reset" id="reset_b" value="다시작성">
             </p>
         </form>
