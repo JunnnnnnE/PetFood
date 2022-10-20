@@ -141,9 +141,8 @@ public class BoardController extends HttpServlet {
 				return;
 			} else if (action.equals("/SearchBoardList.do")) {
 				String search = request.getParameter("searchKeyword");
-				articlesList = boardService.SearchArticles(search);
-				
-				
+				String searchType = request.getParameter("searchCondition");	// TITLE, CONTENT, BOTH
+				articlesList = boardService.SearchArticles(search, searchType);
 				
 				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
@@ -186,7 +185,7 @@ public class BoardController extends HttpServlet {
 
 						String fileName = fileItem.getName().substring(idx + 1);
 						System.out.println("파일명:" + fileName);
-						//articleMap.put(fileItem.getFieldName(), fileName);  //익스플로러에서 업로드 파일의 경로 제거 후 map에 파일명 저장
+						articleMap.put(fileItem.getFieldName(), fileName);  //익스플로러에서 업로드 파일의 경로 제거 후 map에 파일명 저장
 						File uploadFile = new File(currentDirPath + "\\temp\\" + fileName);
 						fileItem.write(uploadFile);
 

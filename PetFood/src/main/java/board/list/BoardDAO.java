@@ -12,6 +12,18 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class BoardDAO {
+	private final String BOARD_INSERT = "INSERT INTO t_petfood_board (articleNO, title, content, imageFileName, id) VALUES (?, ? ,?, ?, ?)"; 
+	private final String BOARD_UPDATE = "update t_petfood_board set title=?,content=?";
+	private final String BOARD_UPDATE_COUNT = "update t_petfood_board set count=? where articleNO=?";
+	private final String BOARD_DELETE = "DELETE FROM t_petfood_board WHERE articleNO=?";
+	private final String BOARD_GET = "select * from t_petfood_board where articleNO=?";
+	private final String BOARD_LIST = "SELECT * from t_petfood_board";
+	private final String BOARD_GET_NEW_ARTICLE = "SELECT  max(articleNO) from t_petfood_board";
+
+	private final String BOARD_SEARCH = "SELECT * from t_petfood_board WHERE ";
+	
+	
+	
 	private DataSource dataFactory;
 	Connection conn;
 	PreparedStatement pstmt;
@@ -30,7 +42,8 @@ public class BoardDAO {
 		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT articleNO,title,content,id, writeDate" + " from t_petfood_board";
+//			String query = "SELECT articleNO,title,content,id, writeDate" + " from t_petfood_board";
+			String query = BOARD_LIST;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
@@ -60,7 +73,8 @@ public class BoardDAO {
 	private int getNewArticleNO() {
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT  max(articleNO) from t_petfood_board ";
+//			String query = "SELECT  max(articleNO) from t_petfood_board ";
+			String query = BOARD_GET_NEW_ARTICLE;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery(query);
@@ -83,8 +97,9 @@ public class BoardDAO {
 			String content = article.getContent();
 			String id = article.getId();
 			String imageFileName = article.getImageFileName();
-			String query = "INSERT INTO t_petfood_board (articleNO, title, content, imageFileName, id)"
-					+ " VALUES (?, ? ,?, ?, ?)";
+//			String query = "INSERT INTO t_petfood_board (articleNO, title, content, imageFileName, id)"
+//					+ " VALUES (?, ? ,?, ?, ?)";
+			String query = BOARD_INSERT;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, articleNO);
@@ -105,9 +120,10 @@ public class BoardDAO {
 		ArticleVO article=new ArticleVO();
 		try{
 			conn = dataFactory.getConnection();
-			String query ="select articleNO,title,content, imageFileName,id,writeDate, count"
-				                     +" from t_petfood_board" 
-				                     +" where articleNO=?";
+//			String query ="select articleNO,title,content, imageFileName,id,writeDate, count"
+//				                     +" from t_petfood_board" 
+//				                     +" where articleNO=?";
+			String query = BOARD_GET;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, articleNO);
@@ -142,9 +158,10 @@ public class BoardDAO {
 	public void updateArticleCount(int count, int articleNO) {
 		try {
 			conn = dataFactory.getConnection();
-			String query = "update t_petfood_board  set count=?";
-			query += " where articleNO=?";
+//			String query = "update t_petfood_board  set count=?";
+//			query += " where articleNO=?";
 			
+			String query = BOARD_UPDATE_COUNT;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, count+1);
@@ -164,7 +181,9 @@ public class BoardDAO {
 		String imageFileName = article.getImageFileName();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "update t_petfood_board set title=?,content=?";
+//			String query = "update t_petfood_board set title=?,content=?";
+			String query = BOARD_UPDATE;
+			
 			if (imageFileName != null && imageFileName.length() != 0) {
 				query += ",imageFileName=?";
 			}
@@ -190,11 +209,8 @@ public class BoardDAO {
 	public void deleteArticle(int  articleNO) {
 		try {
 			conn = dataFactory.getConnection();
-			String query = "DELETE FROM t_petfood_board WHERE articleNO=?";
-//			query += " WHERE articleNO in (";
-//			query += "  SELECT articleNO FROM  t_board ";
-//			query += " START WITH articleNO = ?";
-//			query += " CONNECT BY PRIOR  articleNO = parentNO )";
+//			String query = "DELETE FROM t_petfood_board WHERE articleNO=?";
+			String query = BOARD_DELETE;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, articleNO);
@@ -210,12 +226,10 @@ public class BoardDAO {
 		List<Integer> articleNOList = new ArrayList<Integer>();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT articleNO FROM  t_petfood_board  ";
-//			query += " START WITH articleNO = ?";
-//			query += " CONNECT BY PRIOR  articleNO = parentNO";
+//			String query = "SELECT articleNO FROM t_petfood_board  ";
+			String query = BOARD_LIST;
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, articleNO);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				articleNO = rs.getInt("articleNO");
@@ -229,12 +243,23 @@ public class BoardDAO {
 		return articleNOList;
 	}
 
-	public List<ArticleVO> searchArticles(String search) {
+	public List<ArticleVO> searchArticles(String search, String searchtype) { // searchtype : TITLE/CONTENT/BOTH
 		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 		try {
 			conn = dataFactory.getConnection();
-			String query = "SELECT articleNO,title,content,id, writeDate from t_petfood_board WHERE title like'%" + search + "%'";
-			query += " or content like" + "'%" + search + "%'";
+//			String query = "SELECT articleNO,title,content,id, writeDate from t_petfood_board WHERE title like'%" + search + "%'";
+//			query += " or content like" + "'%" + search + "%'";
+			String query = BOARD_SEARCH;
+			if (searchtype.equals("TITLE")) {
+				query += " title like'%" + search + "%'";
+			}
+			else if (searchtype.equals("CONTENT")) {
+				query += " content like'%" + search + "%'";				
+			}
+			else if (searchtype.equals("BOTH")) {
+				query += " title like'%" + search + "%' or content like" + "'%" + search + "%'";				
+			}
+			
 			System.out.println(query);
 			pstmt = conn.prepareStatement(query);
 

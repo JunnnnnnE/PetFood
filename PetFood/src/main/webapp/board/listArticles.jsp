@@ -49,6 +49,7 @@
 	               <select name="searchCondition">
 	                   <option value="TITLE">제목</option>
 	                   <option value="CONTENT">내용</option>
+	                   <option value="BOTH">제목+내용</option>
 	               </select>
 	               <input type="text" name="searchKeyword"/>
 	               <input type="submit" value="검색">
@@ -77,24 +78,11 @@
 		  <c:when test="${articlesList !=null }" >
 		    <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
 		     <tr align="center">
-			<td width="5%">${articleNum.count}</td>
-			<td width="10%">${article.id }</td>
-			<td align='left'  width="35%" >
-			    <span style="padding-right:30px"></span>  
-			     <c:forEach begin="1" end="2" step="1">
-			     	<a class='cls1' href="${contextPath}/PetFoodBoard/viewArticle.do?articleNO=${article.articleNO}" display=block>${article.title}</a>
-			     </c:forEach>   
-			   <%-- <c:choose>
-			         <c:forEach begin="1" end="${article.length}" step="1">
-			         <c:forEach begin="1" end="2" step="1">
-			              <span style="padding-left:10px"></span>    
-			         </c:forEach>
-			         <span style="font-size:12px;">[답변]</span>
-		                   <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNo=${article.articleNo}">${article.title}</a>
-			          <c:otherwise>
-			            <a class='cls1' href="${contextPath}/board/viewArticle.do?articleNo=${article.articleNO}">${article.title }</a>
-			          </c:otherwise>
-			        </c:choose> --%>
+				<td width="5%">${articleNum.count}</td>
+				<td width="10%">${article.id }</td>
+				<td align='left'  width="35%" >
+			    <span style="padding-right:30px"></span>
+			     <a class='cls1' href="${contextPath}/PetFoodBoard/viewArticle.do?articleNO=${article.articleNO}" display=block>${article.title}</a>
 			  </td>
 			  <td  width="10%"><fmt:formatDate value="${article.writeDate}" /></td> 
 			</tr>

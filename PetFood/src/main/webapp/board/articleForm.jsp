@@ -61,11 +61,11 @@
     <table border=0 align="center">
      <tr>
 	   <td align="right">글제목: </td>
-	   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
+	   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" required/></td>
 	 </tr>
 	 <tr>
 		<td align="right" valign="top"><br>글내용: </td>
-		<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
+		<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"  required></textarea> </td>
      </tr>
      <tr>
         <td align="right">이미지파일 첨부:  </td>

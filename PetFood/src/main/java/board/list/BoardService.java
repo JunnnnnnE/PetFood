@@ -31,8 +31,8 @@ public class BoardService {
 		return articleNOList;
 	}
 
-	public List<ArticleVO> SearchArticles(String search) {
-		List<ArticleVO> articlesList = boardDAO.searchArticles(search);
+	public List<ArticleVO> SearchArticles(String search, String searchtype) {
+		List<ArticleVO> articlesList = boardDAO.searchArticles(search, searchtype);
 		return articlesList;
 	}
 }
