@@ -1,0 +1,41 @@
+#settingsBoard {
+	width: 100%;
+	max-width: 800px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 22px;
+	color: rgb(255, 255, 255);
+	padding: 20px;
+}
+
+#switchTimer {
+	width: 60px;
+	height: 40px;
+	position: relative;
+	border: none;
+	border-radius: 10px;
+	margin-left: 15px;
+	padding: 5px;
+	background-color: rgb(201, 201, 201);;
+	cursor: pointer;
+	transition: ease-in-out .3s;
+}
+
+#switchTimer[state = "on"] {
+	background-color: rgb(255, 200, 50);
+}
+
+#switchTimerBuble {
+	width: 30px;
+	height: 30px;
+	display: block;
+	border-radius: 7px;
+	background-color: rgb(66, 66, 66);
+	transition: ease-in-out .3s;
+}
+
+#switchTimer[state = "on"] #switchTimerBuble {
+	transform: translateX(20px);
+	background-color: rgb(66, 66, 66);
+}

@@ -124,7 +124,8 @@ public class BoardController extends HttpServlet {
 				pw.print("<script>" + "  alert('글을 수정했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/PetFoodBoard/viewArticle.do?articleNO=" + articleNO + "';" + "</script>");
 				return;
-			} else if (action.equals("/removeArticle.do")) {
+			} 
+			else if (action.equals("/removeArticle.do")) {
 				int articleNO = Integer.parseInt(request.getParameter("articleNO"));
 				List<Integer> articleNOList = boardService.removeArticle(articleNO);
 				for (int _articleNO : articleNOList) {
@@ -138,8 +139,17 @@ public class BoardController extends HttpServlet {
 				pw.print("<script>" + "  alert('글을 삭제했습니다.');" + " location.href='" + request.getContextPath()
 						+ "/PetFoodBoard/listArticles.do';" + "</script>");
 				return;
+			} else if (action.equals("/SearchBoardList.do")) {
+				String search = request.getParameter("searchKeyword");
+				String searchType = request.getParameter("searchCondition");	// TITLE, CONTENT, BOTH
+				articlesList = boardService.SearchArticles(search, searchType);
+				
+				request.setAttribute("articlesList", articlesList);
+				nextPage = "/board/listArticles.jsp";
+				
+				
 			}
-
+		
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 			dispatch.forward(request, response);
 		} catch (Exception e) {
@@ -175,7 +185,7 @@ public class BoardController extends HttpServlet {
 
 						String fileName = fileItem.getName().substring(idx + 1);
 						System.out.println("파일명:" + fileName);
-						//articleMap.put(fileItem.getFieldName(), fileName);  //익스플로러에서 업로드 파일의 경로 제거 후 map에 파일명 저장
+						articleMap.put(fileItem.getFieldName(), fileName);  //익스플로러에서 업로드 파일의 경로 제거 후 map에 파일명 저장
 						File uploadFile = new File(currentDirPath + "\\temp\\" + fileName);
 						fileItem.write(uploadFile);
 

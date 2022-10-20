@@ -30,4 +30,9 @@ public class BoardService {
 		boardDAO.deleteArticle(articleNO);
 		return articleNOList;
 	}
+
+	public List<ArticleVO> SearchArticles(String search, String searchtype) {
+		List<ArticleVO> articlesList = boardDAO.searchArticles(search, searchtype);
+		return articlesList;
+	}
 }
