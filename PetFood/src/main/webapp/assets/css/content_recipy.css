@@ -23,9 +23,12 @@
 .event_bar div p {float: left; height: 40px; position: absolute; bottom: 5px;}
 .event_bar div .count{margin-left:10px; font-size: 30px; height: 50px; font-weight: 700; color:#f17070;}
 
+.wr_btn{margin: 50px auto; text-align:center; width:70px; height:70px; background:url(../assets/images/w_icon.png); background-color:#ffce00;   border-radius:50%; float: right; position: absolute; bottom: -50px; right:100px;}
+.wr_btn a{border: 1px solid pink;  width:70px; height:70px; line-height: 70px;}
+
 
 .recipyContent{
-    width: 1130px; margin: 0 auto;}
+    width: 1130px; margin: 0 auto; border: 1px solid green; margin-bottom:80px;}
 
 .posting{float: left;  border: 1px solid #ccc;
     width: 260px; height: 340px; border-radius: 15px;
@@ -49,6 +52,31 @@
   -webkit-box-orient: vertical;    
      display: block; line-height: 22px;}
 
-.test2{border-top: 1px dashed #ccc; width: 200px; height: 38px; margin: 0 auto; width:260px;}
+.test2{border-top: 1px dashed #ccc; height: 38px; margin: 0 auto; width:260px;}
 .test2 p:first-child{float: left; line-height: 38px; font-size: 14px; color:#aaa; margin-left:25px;}
-.test2 p:last-child{float: right; font-size: 13px; line-height: 38px; color:#ccc;margin-right:25px;}
+.test2 p:last-child{float: right; font-size: 13px; line-height: 38px; color:#ccc; margin-right:25px;}
+
+
+
+.bottomPaging {	clear: both;
+display: block;
+	width: 300px;
+	height: 150px;
+	margin: 0 auto;
+	background-color: red;
+	margin-top: 80px;
+	text-align: center;
+	padding-top:20px;
+}
+
+.pagingMenu {
+	display: block;
+	height: 80x;
+	margin: 20px auto;
+	background-color: blue;
+	text-align: center;
+	border: 1px solid aqua; }
+
+.pagingMenu a {display:block; width: 50px; height: 50px; font-size:20px; border-radius: 50%; float:left; line-height:50px;
+color: #fff; background-color:red; margin: 0 auto;  border: 1px solid yellow; }
+

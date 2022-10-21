@@ -83,6 +83,7 @@ request.setCharacterEncoding("UTF-8");
     <div>
     	<p>총 <em class="count">${totArticles}</em>개의 건강하고 맛있는 레시피가 등록되어 있습니다.</p>
     </div>
+    <div class="wr_btn"><a href="${contextPath}/recipe/articleForm.do">글쓰기</a></div>
 </div>
 
 
@@ -129,11 +130,12 @@ request.setCharacterEncoding("UTF-8");
 
 
 		<!-- 하단 글 갯수 리스트 -->
-
-		<div class="cls2">
+<div class="bottomPaging">
+		<div class="pagingMenu">
 			<c:if test="${totArticles != null }">
 				<c:choose>
-					<c:when test="${totArticles >100 }">
+				
+					<c:when test="${totArticles >100 }">					
 						<!-- 글 개수가 100 초과인경우 -->
 						<c:forEach var="page" begin="1" end="10" step="1">
 							<c:if test="${section >1 && page==1 }">
@@ -151,16 +153,19 @@ request.setCharacterEncoding("UTF-8");
 							</c:if>
 						</c:forEach>
 					</c:when>
-					<c:when test="${totArticles ==100 }">
+					
+					
+					<c:when test="${totArticles ==100 }">					
 						<!--등록된 글 개수가 100개인경우  -->
 						<c:forEach var="page" begin="1" end="10" step="1">
 							<a class="no-uline" href="#">${page } </a>
 						</c:forEach>
 					</c:when>
-
 					<c:when test="${totArticles< 100 }">
+					
+					
 						<!--등록된 글 개수가 100개 미만인 경우  -->
-						<c:forEach var="page" begin="1" end="${totArticles/10 +1}"
+						<c:forEach var="page" begin="1" end="${totArticles/13 +1}"
 							step="1">
 							<c:choose>
 								<c:when test="${page==pageNum }">
@@ -179,6 +184,7 @@ request.setCharacterEncoding("UTF-8");
 				</c:choose>
 			</c:if>
 		</div>
-		<br> <br> <a href="${contextPath}/recipe/articleForm.do">글쓰기</a>
+		</div>
+		
 </body>
 </html>
