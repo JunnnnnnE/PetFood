@@ -389,7 +389,7 @@ function characterCheck(obj){
 			Class.forName("org.mariadb.jdbc.Driver"); 
 				
 			//db연결
-			Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","123456");  
+			Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","12345");  
 		
 			//db 값 불러오기
 			PreparedStatement stmt = conn.prepareStatement("select * from t_petfood_user");  
