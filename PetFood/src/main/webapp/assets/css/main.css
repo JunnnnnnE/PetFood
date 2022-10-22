@@ -1,3 +1,4 @@
+/*
 * {
 	box-sizing: border-box;
 	
@@ -40,7 +41,7 @@ main {
 	transition: ease-in-out .2s;
 }
 
-/* .download-btn:first-child {
+ .download-btn:first-child {
 	margin-right: 10px;
 }
 
@@ -66,3 +67,32 @@ main {
 		padding: 10px;
 	}
 } */
+
+
+
+/* 메인본문시작 */
+
+.mainContent{width: 1200px; margin: 0 auto; border: 1px solid red;}
+.mainTopIcon{border: 1px solid green; width: 1000px; height:70px; margin: 20px auto; display: block;}
+.mainTopIcon li{ float: left; width: 90px; height: 70px; text-align: center; margin : 0 5px;}
+.mainTopIcon li:last-child{margin-right: none;}
+.mainTopIcon li a{width: 90px; height: 70px; text-align: center; display: block; line-height: 13px; font-size: 14px; }
+
+.mainContent_01{clear: both; border: 1px solid pink; width: 1200px; height: 200px;}
+.con01_title{width: 250px; float: left;}
+.con01_title p{font-size: 35px; line-height: 30px;}
+.con01_title p:nth-child(1){font-weight: 100;}
+.con01_title p:nth-child(2){font-weight: 800;  box-shadow: inset 0 -13px #ffce00; width: 115px;}
+.con01_title p:nth-child(3){font-size:16px; margin-top: 10px; font-weight: 300; color: #878a8b;}
+.con01_title p:nth-child(4){font-size:13px; margin-top: 50px; font-weight: 700;}
+.con01_title p:nth-child(4) a{ width: 100px; height: 25px; color:#333; display: block; border-bottom: 4px solid #858e9a; }
+
+.con01_recipe{width: 220px; height: 180px;float: left; margin-left: 17px;}
+.con01_img{width: 220px; height: 150px; background-color: #f8f8f8;  border-radius: 10px;}
+.con01_recipe p{font-weight: 300; font-size: 15px; margin: 5px 8px;}
+
+.mainContent_02{}
+
+
+
+
