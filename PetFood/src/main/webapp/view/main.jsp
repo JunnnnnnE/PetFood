@@ -13,13 +13,13 @@
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166641968739682688.jpg" class="d-block " alt="...">
+      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166654406749161600.jpg" class="d-block " alt="...">
     </div>
     <div class="carousel-item">
-      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166641972333177888.jpg" class="d-block " alt="...">
+      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166654406095696320.jpg" class="d-block " alt="...">
     </div>
     <div class="carousel-item">
-      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166641977430824000.jpg" class="d-block " alt="...">
+      <img src="http://hohk.dothome.co.kr/load/data/kt180401/166654405377077504.jpg" class="d-block " alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

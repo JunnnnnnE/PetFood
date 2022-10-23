@@ -1,84 +1,13 @@
-/*
-* {
-	box-sizing: border-box;
-	
-}
-
-h1, h2, h3, h4, h5, h6, p {
-	margin: 0;
-}
-
-
-
-main {
-	width: 100vw;
-	height: 100vh;
-	max-height: 1000px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-	padding: 0 20px;
-}
-
-
-
-.download-wrapper {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	margin: 10px 0;
-}
-
-.download-btn {
-	display: block;
-	margin: 0 10px;
-	padding: 10px 30px;
-	background-color: rgb(65, 65, 65);
-	color:rgb(255, 255, 255);
-	text-decoration: none;
-	text-align: center;
-	transition: ease-in-out .2s;
-}
-
- .download-btn:first-child {
-	margin-right: 10px;
-}
-
-.download-btn:first-child:hover {
-	background-color: rgb(112, 168, 107);
-}
-
-.download-btn:last-child:hover {
-	background-color: rgb(144, 107, 168);
-}
-
-@media screen and (max-width: 500px) {
-	.header p {
-		font-size: 14px;)
-	}
-
-	/* .download-wrapper {
-		justify-content: space-between;
-	} 
-
-	.download-btn {
-		margin: 0;
-		padding: 10px;
-	}
-} */
-
-
-
 /* 메인본문시작 */
 
-.mainContent{width: 1200px; margin: 0 auto; border: 1px solid red;}
-.mainTopIcon{border: 1px solid green; width: 1000px; height:70px; margin: 20px auto; display: block;}
+a{text-decoration:none;}
+.mainContent{width: 1200px; margin: 0 auto;}
+.mainTopIcon{width: 1100px; height:70px; margin: 20px auto; display: block;}
 .mainTopIcon li{ float: left; width: 90px; height: 70px; text-align: center; margin : 0 5px;}
 .mainTopIcon li:last-child{margin-right: none;}
 .mainTopIcon li a{width: 90px; height: 70px; text-align: center; display: block; line-height: 13px; font-size: 14px; }
 
-.mainContent_01{clear: both; border: 1px solid pink; width: 1200px; height: 200px;}
+.mainContent_01{clear: both; width: 1200px; height: 200px; margin: 0 auto;}
 .con01_title{width: 250px; float: left;}
 .con01_title p{font-size: 35px; line-height: 30px;}
 .con01_title p:nth-child(1){font-weight: 100;}
@@ -87,11 +16,34 @@ main {
 .con01_title p:nth-child(4){font-size:13px; margin-top: 50px; font-weight: 700;}
 .con01_title p:nth-child(4) a{ width: 100px; height: 25px; color:#333; display: block; border-bottom: 4px solid #858e9a; }
 
-.con01_recipe{width: 220px; height: 180px;float: left; margin-left: 17px;}
+.con01_recipe{width: 220px; height: 180px;float: left; margin-left: 16px;}
 .con01_img{width: 220px; height: 150px; background-color: #f8f8f8;  border-radius: 10px;}
 .con01_recipe p{font-weight: 300; font-size: 15px; margin: 5px 8px;}
 
-.mainContent_02{}
+.mainContent_02{background: #f3f3f3; height: 300px; margin-top: 90px;}
+.mainContent02_con{border: 1px solid pink; width: 1200px; height: 430px; margin: 0 auto; }
+.mainContent02_img{background-color: aquamarine; width: 350px; height: 350px; border-radius: 15px; margin-top: 80px; float: left;}
+.mainContent02_con .mainContent02_title{margin-left: 30px; margin-top:100px;  float: left; font-size:32px; background-color: pink; width: 800px; font-weight: 700; line-height: 38px; float: left;}
+.mainContent02_con > div:nth-child(3){margin-left: 30px; margin-top: 23px; width: 820px; height: 230px; float: left;}
+.mainContent02_con p{margin-left: 30px; margin-top: 22px; width: 250px; height: 230px; background-color: #ffce00; border-radius: 15px; float: left; box-sizing: border-box;}
+.mainContent02_con p:last-child{margin-right: 0; color:aqua;}
+
+.mainContent_03{clear: both; width: 1200px; height: 190px; margin: 0 auto; background: #858e9a; border: 1px solid green; margin-top: 230px;}
+.mainContent_03_banner:first-child{float: left;}
+.mainContent_03_banner:last-child{float: right;}
+
+.mainContent_04{margin: 70px auto; width: 1200px; height: 300px; border: 1px solid pink;}
+
+
+
+/* 푸터 좀 하자 */
+footer{background-color: #505050; height: 150px;}
+.footerDiv{width: 1200px; height: 150px; border: 1px solid yellow; margin: 0 auto;}
+.f_logo{width: 220px; height: 100px; background: #ffce00; margin-top: 25px; float: left;}
+.f_left{width: 700px; height: 100px; background:#f8f8f8; margin-left: 30px; margin-top: 25px; float: left;}
+.f_right{width: 220px; height: 100px; background:#333; margin-top: 25px; float: right;}
+
+
 
 
 
