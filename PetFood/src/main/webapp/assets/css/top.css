@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-
+a{text-decoration:none !important; color:#333 !important;}
 header{border-bottom: 1px solid #ccc; height: 180px;}
 
 .h_topBanner {background-color: #ffce00;
@@ -17,11 +17,11 @@ height: 50px; border-top: 5px solid #333;}
 nav{width: 1200px; height: 120px; margin: 0 auto;}
 #logo{position: absolute; top: 20px; left: 500px;}
 
-.h_topQuickMenu{ width: 180px; float: right;}
+.h_topQuickMenu{ width: 230px; float: right;}
 .h_topQuickMenu ul{display: block; }
-.h_topQuickMenu ul li{ float: left; padding: 0 9px; text-align: center; box-sizing: border-box; background: url(../images/bar01.jpg) no-repeat right center;}
-.h_topQuickMenu ul li:last-child{background:none;}
-.h_topQuickMenu ul li a{color: #333; font-size: 13px;}
+.h_topQuickMenu ul li{ float: left; text-align: center; box-sizing: border-box; background: url(../images/bar01.jpg) no-repeat right center;}
+.h_topQuickMenu ul li:last-child{ background:none;}
+.h_topQuickMenu ul li a{color: #333; font-size: 13px; padding: 5px 10px;}
 
 .menu{display: block; clear: both; height: 60px;   width: 1200px; position: absolute; bottom: 0px;}
 .menu li:first-child{border-left: none;}

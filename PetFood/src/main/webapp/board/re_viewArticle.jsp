@@ -11,7 +11,7 @@
    <meta charset="UTF-8">
    <title>글보기</title>
    <style>
-     #tr_btn_modify{
+     #tr_btn_modify_re{
        display:none;
      }
    
@@ -20,23 +20,28 @@
    <script type="text/javascript" >
   
    
-     function backToList(obj){
-	    obj.action="${contextPath}/recipe/listArticles.do";
-	    obj.submit();
+     function backToList(tt){
+    	 tt.action="${contextPath}/recipe/listArticles.do";
+    	 tt.submit();
      }
+     
  
-	 function fn_enable1(obj){
-		 document.getElementById("i_title").disabled=false;
-		 document.getElementById("i_content").disabled=false;
-		 document.getElementById("i_imageFileName").disabled=false;
-		 document.getElementById("tr_btn_modify").style.display="block";
-		 document.getElementById("tr_btn").style.display="none";
+	 
+	 function ttest(tt){
+ 		 document.getElementById("i_title_re").disabled=false;	
+		 document.getElementById("i_content_re").disabled=false;
+		 document.getElementById("i_imageFileName_re").disabled=false; 
+		 document.getElementById("tr_btn_modify_re").style.display="block"; 
+ 		 document.getElementById("tr_btn_re").style.display="none"; 
 	 }
 	 
-	 function fn_modify_article(obj){
-		 obj.action="${contextPath}/recipe/test_modArticle.do";
-		 obj.submit();
+	 
+	 function tt_modify_article(tt){
+		 tt.action="${contextPath}/recipe/modArticle.do";
+		 tt.submit();
 	 }
+	 
+	 
 	 
 	 function fn_remove_article(url,articleNO){
 		 var form = document.createElement("form");
@@ -52,7 +57,6 @@
 		 form.submit();	 
 	 }
 	 
-
 	 
 	 
 	 function readURL(input) {
@@ -67,7 +71,7 @@
  </script>
 </head>
 <body>
-  <form name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+  <form name="recipe_con" method="post" action="${contextPath}"  enctype="multipart/form-data">
   <table>
   <tr>
    <td width="150" align="center" bgcolor="#FF9933">
@@ -76,7 +80,7 @@
    <td >
     <input type="text"  value="${article.articleNO }"  disabled />
     
-<!--     글 수정시 글번호를 컨트롤러로 전송하기 위해 미리 hidden 태그를 이용해 글번호를 저장해둠 -->
+
     <input type="hidden" name="articleNO" value="${article.articleNO}"  />
    </td>
   </tr>
@@ -94,7 +98,7 @@
    </td>
 
    <td>
-    <input type=text value="${article.title }"  name="title"  id="i_title" disabled />
+    <input type=text value="${article.title }"  name="title" id="i_title_re" disabled="true">
    </td>      
   </tr>
   <tr>
@@ -102,7 +106,7 @@
       내용
    </td>
    <td>
-    <textarea>${article.content }</textarea>
+    <textarea rows="20" cols="60"  name="content"  id="i_content_re"  disabled >${article.content }</textarea>
    </td>  
   </tr>
  
@@ -119,7 +123,7 @@
   </tr>  
   <tr>
     <td>
-       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
+       <input  type="file"  name="imageFileName " id="i_imageFileName_re"   disabled   onchange="readURL(this);"   />
     </td>
   </tr>
  </c:if>
@@ -131,16 +135,16 @@
 	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
 	   </td>   
   </tr>
-  <tr   id="tr_btn_modify"  >
-	   <td colspan="2"   align="center" >
-	       <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
-         <input type=button value="취소"  onClick="backToList(frmArticle)">
-	   </td>   
+  <tr id="tr_btn_modify_re" >
+	   <td >
+	       <input type=button value="수정반영하기"  onClick="tt_modify_article(recipe_con)"  >
+         <input type=button value="취소"  onClick="backToList(recipe_con)">
+	  </td>   
   </tr>
     
-  <tr  id="tr_btn"    >
-   <td colspan=2 align=center>
-	    <input type=button value="수정하기" onClick="fn_enable1(this.form); alert('왜안돼');">
+  <tr id="tr_btn_re" >
+   <td>
+   		<input type=button value="수정버튼테스트" onClick="ttest(this.form);">
 	    <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/recipe/removeArticle.do', ${article.articleNO})">
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
    </td>
