@@ -36,15 +36,13 @@ a{text-decoration:none;}
 
 
 
-/* 푸터 좀 하자 */
-footer{background-color: #505050; height: 150px;}
-.footerDiv{width: 1200px; height: 150px; border: 1px solid yellow; margin: 0 auto;}
-.f_logo{width: 220px; height: 100px; background: #ffce00; margin-top: 25px; float: left;}
-.f_left{width: 700px; height: 100px; background:#f8f8f8; margin-left: 30px; margin-top: 25px; float: left;}
-.f_right{width: 220px; height: 100px; background:#333; margin-top: 25px; float: right;}
 
-
-
-
+/* 푸터 */
+footer{background-color: #333; height: 150px; border-bottom: 5px solid #1a1a1a;}
+.footerDiv{width: 1200px; height: 150px; margin: 0 auto;}
+.f_logo{width: 220px; height: 100px; background: #ffce00; margin-top: 25px; float: left; background: url(../images/logo_f.png);}
+.f_left{width: 900px; height: 100px; margin-left: 30px; margin-top: 25px; float: left; background: url(../images/logo_f_etc.png) no-repeat right 15px;}
+.f_left b{color: #b8b8b8; line-height: 20px;}
+.f_left p{color: #b8b8b8; font-size: 13px; line-height: 25px;}
 
 

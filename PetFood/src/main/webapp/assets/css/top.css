@@ -29,21 +29,42 @@ nav{width: 1200px; height: 120px; margin: 0 auto;}
 .menu li a{color: #4d4d4d; line-height: 60px; height: 60px; font-size: 18px; font-weight: 500;}
 
 .h_right{width: 295px; height: 43px; position: absolute; right: 0px; bottom: 8px;}
-.w_btn{background: #ffce00; width: 43px; height: 43px; float: left; border-radius: 15px; text-align: center; position: relative; cursor: pointer;}
-.w_btn img{position: absolute; top:9px; left: 9px; width: 25px; height: 25px;}
-.h_search{width: 250px; height: 60px; float: right; position: relative;}
-.h_search input{width: 220px;
+
+.h_search{width: 250px; height: 47px; float: right; }
+
+.h_search input:first-child{  
+  position: relative;
+  height: 45px;
+  width: 220px;
   border:3px solid #ffce00;
   border-radius: 15px;
   padding: 10px 12px;
   font-size: 14px;}
-.h_search img{position : absolute;
+
+.h_search input:nth-child(2) {
+  position:absolute;
+  width: 45px;
+  height: 45px;
+  right:0px;
+  top:0;
+  float: left;
+  display: block;
+  background: url(../images/icon_search.png) no-repeat center;
+  background-color: #ffce00;
+  border: none;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 0 15px 15px 0;
+  
+}
+
+/* .h_search img{position : absolute;
     background: #ffce00;
-  width: 17px;
-  top: 2px;
+  width: 20px;
+  top: 0px;
   right: 2px;
   margin: 0;
     padding: 11px;
     border-radius: 0 15px 15px 0;
 
-}
+} */
