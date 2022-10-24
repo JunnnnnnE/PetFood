@@ -38,7 +38,7 @@
 		Class.forName("org.mariadb.jdbc.Driver");  /* System.out.println("mariadb 사용가능"); */
 			
 		//db연결
-		Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","123456");  /* System.out.println(conn + "<-- conn"); */
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","12345");  /* System.out.println(conn + "<-- conn"); */
 	
 		//db 값 불러오기
 		PreparedStatement stmt = conn.prepareStatement("select * from t_petfood_user");  /* System.out.println(stmt + "<-- stmt"); */

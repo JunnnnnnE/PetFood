@@ -49,7 +49,6 @@
                         <div class="h_search">
                             <input type="text" placeholder="#생일상 #브로콜리 #당근">
                             <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-
                         </div>
                     </div>
                 </nav>

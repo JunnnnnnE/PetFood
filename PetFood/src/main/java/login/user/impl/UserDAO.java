@@ -16,7 +16,6 @@ public class UserDAO {
 	//SQL 명령어들
 	private final String USER_GET = "select * from t_petfood_user where userId=? and userPwd=?";
 
-	
 	//CRUD 기능의 메소드 구현
 	//회원 등록
 	public UserVO getUser(UserVO vo) {
@@ -45,6 +44,5 @@ public class UserDAO {
 		}
 		return user;
 	}
-	
-	
+
 }
