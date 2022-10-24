@@ -74,11 +74,13 @@
              </div>           
         </div>        
     
-    </div><!--mainContent 끝-->
+    </div>
+    <!--mainContent 끝-->
 
 
 
 
 
 
-</body></html>
+<jsp:include page="footer.jsp"></jsp:include>
+<html>
