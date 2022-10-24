@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -54,14 +55,55 @@ public class BoardController extends HttpServlet {
 		try {
 			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 			if (action == null) {
-				articlesList = boardService.listArticles();
-				request.setAttribute("articlesList", articlesList);
+
+//          	  	HttpSession session = request.getSession();
+//
+//          	  	String a = (String)session.getAttribute("searchKeyword");
+//          	  	String b = (String)session.getAttribute("searchCondition");
+          	  	
+//          	  	System.out.println(a);
+//          	  	System.out.println(b);
+				
+				
+				
+				String _section=request.getParameter("section");
+				String _pageNum=request.getParameter("pageNum");
+				int section = Integer.parseInt(((_section==null)? "1":_section) );
+				int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
+				Map<String, Integer> pagingMap = new HashMap<String, Integer>();
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				Map articlesMap=boardService.listArticles(pagingMap);
+				articlesMap.put("section", section);
+				articlesMap.put("pageNum", pageNum);
+				
+				request.setAttribute("articlesMap", articlesMap);
+				
+				
+//				articlesList = boardService.listArticles();
+//				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
 			} 
 			else if (action.equals("/listArticles.do")) {
-				articlesList = boardService.listArticles();
-				request.setAttribute("articlesList", articlesList);
+			
+				String _section=request.getParameter("section");
+				String _pageNum=request.getParameter("pageNum");
+				int section = Integer.parseInt(((_section==null)? "1":_section) );
+				int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
+				Map pagingMap=new HashMap();
+				pagingMap.put("section", section);
+				pagingMap.put("pageNum", pageNum);
+				Map articlesMap=boardService.listArticles(pagingMap);
+				articlesMap.put("section", section);
+				articlesMap.put("pageNum", pageNum);				
+				
+				
+				request.setAttribute("articlesMap", articlesMap);
 				nextPage = "/board/listArticles.jsp";
+				
+//				articlesList = boardService.listArticles();
+//				request.setAttribute("articlesList", articlesList);
+//				nextPage = "/board/listArticles.jsp";
 			} 
 			else if (action.equals("/articleForm.do")) {
 				nextPage = "/board/articleForm.jsp";
@@ -140,11 +182,37 @@ public class BoardController extends HttpServlet {
 						+ "/PetFoodBoard/listArticles.do';" + "</script>");
 				return;
 			} else if (action.equals("/SearchBoardList.do")) {
+
+          	  	HttpSession session = request.getSession();
+          	  	
 				String search = request.getParameter("searchKeyword");
-				String searchType = request.getParameter("searchCondition");	// TITLE, CONTENT, BOTH
-				articlesList = boardService.SearchArticles(search, searchType);
+				String searchType = "";
+				if (request.getParameter("serachCondition") != null ) {
+					searchType = request.getParameter("searchCondition");	// BOTH, TITLE, CONTENT
+				}
+				else {
+					searchType = "BOTH";
+				}
+
+          	  	session.setAttribute("searchKeyword", search);
+          	  	session.setAttribute("searchCondition", searchType);
+          	  	
+				System.out.println(search);
+				System.out.println(searchType);
+
+//				String _section=request.getParameter("section");
+//				String _pageNum=request.getParameter("pageNum");
+//				int section = Integer.parseInt(((_section==null)? "1":_section));
+//				int pageNum = Integer.parseInt(((_pageNum==null)? "1":_pageNum));
 				
-				request.setAttribute("articlesList", articlesList);
+				articlesList = boardService.SearchArticles(search, searchType);
+
+				Map articlesMap = new HashMap();
+
+				articlesMap.put("articlesList", articlesList);
+				
+				request.setAttribute("articlesMap", articlesMap);
+				
 				nextPage = "/board/listArticles.jsp";
 				
 				

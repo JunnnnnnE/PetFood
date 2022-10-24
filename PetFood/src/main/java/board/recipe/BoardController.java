@@ -54,7 +54,7 @@ public class BoardController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
 		try {
-			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+			//List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 			if (action == null) {	
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
@@ -71,6 +71,7 @@ public class BoardController extends HttpServlet {
 				nextPage = "/board/re_listArticles.jsp";
 				
 			} else if (action.equals("/listArticles.do")) {
+			
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
 				int section = Integer.parseInt(((_section==null)? "1":_section) );
@@ -123,7 +124,7 @@ public class BoardController extends HttpServlet {
 				nextPage = "/board/re_viewArticle.jsp";
 				
 				
-			} else if (action.equals("/test_modArticle.do")) {
+			} else if (action.equals("/modArticle.do")) {
 				Map<String, String> articleMap = upload(request, response);
 				int articleNO = Integer.parseInt(articleMap.get("articleNO"));
 				articleVO.setArticleNO(articleNO);

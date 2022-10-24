@@ -11,7 +11,7 @@
     Class.forName("org.mariadb.jdbc.Driver");
     
     // db접속
-    Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","123456");
+    Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/petfood","root","12345");
     
     //db 데이터 검색
     PreparedStatement pstmt = conn.prepareStatement("select userId from t_petfood_user where userId='"+id+"'");

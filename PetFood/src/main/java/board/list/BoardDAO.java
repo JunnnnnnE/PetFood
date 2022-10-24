@@ -6,10 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import board.list.ArticleVO;
 
 public class BoardDAO {
 	private final String BOARD_INSERT = "INSERT INTO t_petfood_board (articleNO, title, content, imageFileName, id) VALUES (?, ? ,?, ?, ?)"; 
@@ -38,6 +41,72 @@ public class BoardDAO {
 		}
 	}
 
+	public List<ArticleVO> selectAllArticles(Map pagingMap){
+		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+		int section = (Integer)pagingMap.get("section");
+		int pageNum=(Integer)pagingMap.get("pageNum");
+
+		
+		System.out.println(section + " : 세션 수 뜨나보자");
+		System.out.println(pageNum + " : 페이지 수 뜨나보자");
+		try{
+		   conn = dataFactory.getConnection();
+		   
+		   String query = "select * from ("
+		   		+ "select row_number() over(order by articleNO desc) as 'recNum',"
+		   		+ " articleNO,  title, id, writedate, imageFileName"
+		   		+ " from t_petfood_board"
+		   		+ " where articleNO"
+		   		+ " ) as c"
+		   		+ " where  c.recNum between(?-1)*100+(?-1)*12+1 and (?-1)*100+?*12";		 
+
+			
+		   System.out.println(query);
+		   pstmt= conn.prepareStatement(query);
+		    
+			
+			 pstmt.setInt(1, section); 
+			 pstmt.setInt(2, pageNum); 
+			 pstmt.setInt(3, section);
+			 pstmt.setInt(4, pageNum);
+			 
+			 
+			
+			
+
+					 
+		   ResultSet rs =pstmt.executeQuery();
+		   while(rs.next()){
+  
+		      int articleNO = rs.getInt("articleNO");
+		      String title = rs.getString("title");
+		      String id = rs.getString("id");
+		      Date writeDate= rs.getDate("writeDate");
+		      String imageFileName= rs.getString("imageFileName");
+
+
+		      ArticleVO article = new ArticleVO();
+
+		      article.setArticleNO(articleNO);
+		      article.setTitle(title);
+		      article.setId(id);
+		      article.setWriteDate(writeDate);
+		      article.setImageFileName(imageFileName);
+
+		      System.out.println("add간다");
+		      articlesList.add(article);	
+		      
+		   } //end while
+		   rs.close();
+		   pstmt.close();
+		   conn.close();
+	  }catch(Exception e){
+	     e.printStackTrace();	
+	  }
+	  return articlesList; 
+    } 
+	
+	
 	public List<ArticleVO> selectAllArticles() {
 		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 		try {
@@ -243,12 +312,32 @@ public class BoardDAO {
 		return articleNOList;
 	}
 
+	public int selectTotArticles() {
+		try {
+			conn = dataFactory.getConnection();
+			String query = "select count(articleNO) from t_petfood_board ";
+			System.out.println(query);
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				return (rs.getInt(1));
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public List<ArticleVO> searchArticles(String search, String searchtype) { // searchtype : TITLE/CONTENT/BOTH
 		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 		try {
 			conn = dataFactory.getConnection();
 //			String query = "SELECT articleNO,title,content,id, writeDate from t_petfood_board WHERE title like'%" + search + "%'";
 //			query += " or content like" + "'%" + search + "%'";
+			
+			
 			String query = BOARD_SEARCH;
 			if (searchtype.equals("TITLE")) {
 				query += " title like'%" + search + "%'";

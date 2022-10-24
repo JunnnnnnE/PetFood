@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,35 +33,45 @@ public class BoardDAO {
 		List articlesList = new ArrayList();
 		int section = (Integer)pagingMap.get("section");
 		int pageNum=(Integer)pagingMap.get("pageNum");
+
+		
 		System.out.println(section + " : 세션 수 뜨나보자");
 		System.out.println(pageNum + " : 페이지 수 뜨나보자");
 		try{
 		   conn = dataFactory.getConnection();
-		   String query = "SELECT * FROM (select ROW_NUMBER() OVER(ORDER BY articleNO DESC) as recNum, "
-		   		+ "articleNO, title, id, writedate, imageFileName FROM t_recipe_board WHERE articleNO) c "
-		   		+ " where c.recNum between(?-1)*100+(?-1)*10+1 and (?-1)*100+?*10";
+		   
+		   String query = "select * from ("
+		   		+ "select row_number() over(order by articleNO desc) as 'recNum',"
+		   		+ " articleNO,  title, id, writedate, imageFileName"
+		   		+ " from t_recipe_board"
+		   		+ " where articleNO"
+		   		+ " ) as c"
+		   		+ " where  c.recNum between(?-1)*100+(?-1)*12+1 and (?-1)*100+?*12";		 
 
+			
 		   System.out.println(query);
 		   pstmt= conn.prepareStatement(query);
+		    
 			
-			pstmt.setInt(1, section); 
-			pstmt.setInt(2, pageNum);
-			pstmt.setInt(3, section);
-			pstmt.setInt(4, pageNum);
+			 pstmt.setInt(1, section); 
+			 pstmt.setInt(2, pageNum); 
+			 pstmt.setInt(3, section);
+			 pstmt.setInt(4, pageNum);
+			 
+			 
+			
+			
+
 					 
 		   ResultSet rs =pstmt.executeQuery();
 		   while(rs.next()){
   
 		      int articleNO = rs.getInt("articleNO");
-		      System.out.println(articleNO);
 		      String title = rs.getString("title");
-		      System.out.println(title);
 		      String id = rs.getString("id");
-		      System.out.println(id);
 		      Date writeDate= rs.getDate("writeDate");
-		      System.out.println(writeDate);
 		      String imageFileName= rs.getString("imageFileName");
-		      System.out.println(imageFileName);
+
 
 		      ArticleVO article = new ArticleVO();
 
@@ -268,6 +279,50 @@ public class BoardDAO {
 	}
 	
 	
+	
+	//총 데이터 개수 반환
+	public int getCount() {
+		int count = 0;
+		Connection con =null;
+		PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	    	
+	        con = dataFactory.getConnection();
+	        StringBuffer sql = new StringBuffer();
+	        sql.append("SELECT COUNT(articleNO) FROM t_recipe_board");
 	 
+	        pstmt = con.prepareStatement(sql.toString());
+	 
+	        rs = pstmt.executeQuery();
+	 
+	        int index = 0;
+	        if (rs.next()) {
+	            count = rs.getInt(++index);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null)
+	                rs.close();
+	            if (pstmt != null)
+	                pstmt.close();
+	            if (con != null)
+	                con.close();
+	        } catch (SQLException e) {
+	         
+	            e.printStackTrace();
+	        }
+	    }
+	 
+	    return count;
+	}
+
+	
+	
+	
+	
 
 }
