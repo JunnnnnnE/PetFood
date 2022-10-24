@@ -4,6 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="articlesList" value="${articlesMap.articlesList}" />
+<c:set var="totArticles" value="${articlesMap.totArticles}" />
+<c:set var="section" value="${articlesMap.section}" />
+<c:set var="pageNum" value="${articlesMap.pageNum}" />
 <%
   request.setCharacterEncoding("UTF-8");
 %>  
@@ -37,19 +41,20 @@
   <meta charset="UTF-8">
   <title>글목록창</title>
 </head>
+<jsp:include page="../view/header.jsp"></jsp:include>
 <body>
    <div class="wrap">
     <h1 class="tit">글 목록</h1>
-    <h3 class="sub_tit"><strong>환영합니다</strong><!-- <a href="logout.do">Log-out</a> --></h3>
+    <h3 class="sub_tit">"${user.userName}"<strong>님 환영합니다</strong><!-- <a href="logout.do">Log-out</a> --></h3>
 	<!-- <form action="PetFoodBoard/SearchBoardList.do" method="post"> -->
-	<form action="${contextPath}/PetFoodBoard//SearchBoardList.do" method="post">
+	<form action="${contextPath}/PetFoodBoard/SearchBoardList.do" method="post">
 	    <table class="board_table b_search">
 	       <tr>
 	           <td>
 	               <select name="searchCondition">
+	                   <option value="BOTH">제목+내용</option>
 	                   <option value="TITLE">제목</option>
 	                   <option value="CONTENT">내용</option>
-	                   <option value="BOTH">제목+내용</option>
 	               </select>
 	               <input type="text" name="searchKeyword"/>
 	               <input type="submit" value="검색">
@@ -92,5 +97,63 @@
 		</table>
 		<p class="newWrite"><a href="${contextPath}/PetFoodBoard/articleForm.do">글쓰기</a></p>
     </div>
+    
+		<!-- 하단 글 갯수 리스트 -->
+	<div class="bottomPaging">
+		<div class="pagingMenu">
+			<c:if test="${totArticles != null }">
+				<c:choose>
+				
+					<c:when test="${totArticles >100 }">					
+						<!-- 글 개수가 100 초과인경우 -->
+						<c:forEach var="page" begin="1" end="10" step="1">
+							<c:if test="${section >1 && page==1 }">
+								<a class="no-uline"
+									href="${contextPath }/PetFoodBoard/listArticles.do?section=${section-1}&pageNum=${(section-1)*10 +1 }">&nbsp;
+									pre </a>
+							</c:if>
+							<a class="no-uline"
+								href="${contextPath }/PetFoodBoard/listArticles.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }
+							</a>
+							<c:if test="${page ==10 }">
+								<a class="no-uline"
+									href="${contextPath }/PetFoodBoard/listArticles.do?section=${section+1}&pageNum=${section*10+1}">&nbsp;
+									next</a>
+							</c:if>
+						</c:forEach>
+					</c:when>
+					
+					
+					<c:when test="${totArticles ==100 }">					
+						<!--등록된 글 개수가 100개인경우  -->
+						<c:forEach var="page" begin="1" end="10" step="1">
+							<a class="no-uline" href="#">${page } </a>
+						</c:forEach>
+					</c:when>
+					<c:when test="${totArticles< 100 }">
+					
+					
+						<!--등록된 글 개수가 100개 미만인 경우  -->
+						<c:forEach var="page" begin="1" end="${totArticles/13 +1}"
+							step="1">
+							<c:choose>
+								<c:when test="${page==pageNum }">
+									<a class="sel-page"
+										href="${contextPath }/PetFoodBoard/listArticles.do?section=${section}&pageNum=${page}">${page }
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a class="no-uline"
+										href="${contextPath }/PetFoodBoard/listArticles.do?section=${section}&pageNum=${page}">${page }
+									</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</c:if>
+		</div>
+	</div>
+	
 </body>
 </html>

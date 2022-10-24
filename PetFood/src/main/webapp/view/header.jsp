@@ -26,7 +26,7 @@
             <div class="h_topBar">
                 <div class="h_topQuickMenu">
                     <ul>
-                        <li><a href="#">로그인</a></li>
+                        <li><a href="../login.jsp">로그인</a></li>
                         <li><a href="#">회원가입</a></li>
                         <li><a href="#">고객센터</a></li>
                     </ul>
@@ -42,12 +42,14 @@
                         <img src="../assets/images/logo.png" alt="개밥멍선생" width="198" height="88">
                     </div>
                     <div class="h_right">
+                    	<form action="${contextPath}/PetFood/PetFoodBoard/SearchBoardList.do" method="post">
                         <div class="w_btn"><img src="../assets/images/w_icon.png"></div>
-                        <div class="h_search">
-                            <input type="text" placeholder="#생일상 #브로콜리 #당근">
-                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-
-                        </div>
+	                        <div class="h_search">
+	                            <input type="text" placeholder="#생일상 #브로콜리 #당근"  name="searchKeyword">	                            
+	                            <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+	               				<input type="submit" value="검색">
+	                        </div>
+                        </form>
                     </div>
                 </nav>
 

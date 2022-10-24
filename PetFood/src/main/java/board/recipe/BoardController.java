@@ -54,7 +54,7 @@ public class BoardController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
 		try {
-			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+			//List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
 			if (action == null) {	
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");

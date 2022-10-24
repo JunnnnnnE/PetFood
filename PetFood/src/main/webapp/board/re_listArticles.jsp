@@ -130,7 +130,7 @@ request.setCharacterEncoding("UTF-8");
 
 
 		<!-- 하단 글 갯수 리스트 -->
-<div class="bottomPaging">
+	<div class="bottomPaging">
 		<div class="pagingMenu">
 			<c:if test="${totArticles != null }">
 				<c:choose>
@@ -184,7 +184,7 @@ request.setCharacterEncoding("UTF-8");
 				</c:choose>
 			</c:if>
 		</div>
-		</div>
+	</div>
 		
 </body>
 </html>

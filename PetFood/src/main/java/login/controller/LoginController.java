@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
                //3. 화면 네비게이션
                if(user != null) { 	// 로그인 성공
             	  HttpSession session = request.getSession();
-   				  session.setAttribute("s_user_id",userId);
+   				  session.setAttribute("user", user);
 
 //                nextPage = "/view/main.jsp"; //로그인 성공 했을때 넘어갈 페이지(메인)
                   nextPage = "/view/main.jsp";
