@@ -72,7 +72,8 @@ public class LoginController extends HttpServlet {
                session.invalidate();
 
                //세션 종료 후, 메인 화면으로 이동
-               response.sendRedirect("login.jsp");
+               response.sendRedirect("view/main.jsp");
+               System.out.println("main으로 이동");
             }
             RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
             dispatch.forward(request, response);
