@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import board.list.ArticleVO;
+
 public class BoardService {
-	BoardDAO boardDAO;
+	board.recipe.BoardDAO boardDAO;
 
 	public BoardService() {
-		boardDAO = new BoardDAO();
+		boardDAO = new board.recipe.BoardDAO();
 	}
 
 	public Map listArticles(Map<String, Integer> pagingMap) {
@@ -26,17 +28,17 @@ public class BoardService {
 		return articlesList;
 	}
 
-	public int addArticle(ArticleVO article) {
+	public int addArticle(board.recipe.ArticleVO article) {
 		return boardDAO.insertNewArticle(article);
 	}
 
-	public ArticleVO viewArticle(int articleNO) {
-		ArticleVO article = null;
+	public board.recipe.ArticleVO viewArticle(int articleNO) {
+		board.recipe.ArticleVO article = null;
 		article = boardDAO.selectArticle(articleNO);
 		return article;
 	}
 
-	public void modArticle(ArticleVO article) {
+	public void modArticle(board.recipe.ArticleVO article) {
 		boardDAO.updateArticle(article);
 	}
 
@@ -46,11 +48,35 @@ public class BoardService {
 		return articleNOList;
 	}
 
-	public int addReply(ArticleVO article) {
+	
+	public Map SearchArticles(Map<String, Integer> pagingMap, String search, String searchtype) {
+		Map articlesMap = new HashMap();
+		
+		List<board.recipe.ArticleVO> articlesList = boardDAO.searchArticlesRecipe(search, searchtype);
+		articlesMap.put("articlesList", articlesList);
+		int totArticles = boardDAO.selectTotArticles();
+		articlesMap.put("articlesList", articlesList);
+		articlesMap.put("totArticles", totArticles);
+		
+		return articlesMap;
+	}
+	
+	// not use
+	public List<board.recipe.ArticleVO> SearchArticles(String search, String searchtype) {
+		List<board.recipe.ArticleVO> articlesList = boardDAO.searchArticlesRecipe(search, searchtype);
+		return articlesList;
+	}
+	
+	
+	
+	
+	
+	
+	public int addReply(board.recipe.ArticleVO article) {
 		return boardDAO.insertNewArticle(article);
 	}
 	
-	public List<ArticleVO> getMainPage() {
+	public List<board.recipe.ArticleVO> getMainPage() {
 		return boardDAO.getMainPageInfo();
 	}
 
