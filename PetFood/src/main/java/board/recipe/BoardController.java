@@ -167,6 +167,14 @@ public class BoardController extends HttpServlet {
 				pw.print("<script>" + "  alert('삭제햇다');" + " location.href='" + request.getContextPath()
 				+ "/recipe/listArticles.do';" + "</script>");
 				return;
+			} else if (action.equals("/setMainPage.do")) {
+				List<ArticleVO> vo = boardService.getMainPage();
+				System.out.println(vo);
+				
+				request.setAttribute("recipeArticles", vo);
+				nextPage = "/view/main.jsp";
+				
+				
 			}
 			
 			

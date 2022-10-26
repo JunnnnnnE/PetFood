@@ -3,7 +3,7 @@
 <!-- 푸터 -->
 
 <head>
-<link rel="stylesheet" href="../assets/css/bottom.css">
+<link rel="stylesheet" href="../assets/css/bottom.css?after">
 </head>
 <footer>
     <div class="footerDiv">

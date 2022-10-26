@@ -319,6 +319,41 @@ public class BoardDAO {
 	 
 	    return count;
 	}
+	
+	
+	public List<ArticleVO> getMainPageInfo() {
+		List<ArticleVO> articlesList = new ArrayList();
+		try {
+			conn = dataFactory.getConnection();
+			String query = "SELECT * from t_recipe_board ORDER BY articleNO desc limit 4";
+			System.out.println(query);
+			pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+				int articleNO = rs.getInt("articleNO");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String id = rs.getString("id");
+				String imagefilename = rs.getString("imageFileName");
+				Date writeDate = rs.getDate("writeDate");
+				ArticleVO article = new ArticleVO();
+				article.setArticleNO(articleNO);
+				article.setTitle(title);
+				article.setContent(content);
+				article.setId(id);
+				article.setImageFileName(imagefilename);
+				article.setWriteDate(writeDate);
+				articlesList.add(article);
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return articlesList;
+	}
 
 	
 	

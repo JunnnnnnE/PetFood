@@ -49,5 +49,9 @@ public class BoardService {
 	public int addReply(ArticleVO article) {
 		return boardDAO.insertNewArticle(article);
 	}
+	
+	public List<ArticleVO> getMainPage() {
+		return boardDAO.getMainPageInfo();
+	}
 
 }
