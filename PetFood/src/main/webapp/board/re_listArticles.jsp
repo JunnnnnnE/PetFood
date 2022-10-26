@@ -47,8 +47,7 @@ request.setCharacterEncoding("UTF-8");
 				<li><a href="#">당근</a></li>
 				<li><a href="#">쌀/곡류</a></li>
 				<li><a href="#">브로콜리</a></li>
-				<li><a href="#">계란</a></li>
-				<li><a href="#">사과</a></li>
+
 			</ul>
 
 
@@ -70,21 +69,47 @@ request.setCharacterEncoding("UTF-8");
 				<li><a href="#">소화기관</a></li>
 				<li><a href="#">알러지</a></li>
 			</ul>
-			<div class="etcMenu">
-				<a href="#">이번주 추천 레시피 보러가기</a>
-			</div>
+
 		</div>
-		<!-- 상단 대분류/중분류 메뉴 끝 -->
+	</div>
+	<!-- 상단 대분류/중분류 메뉴 끝 -->
+
+
+	<!-- 검색 -->
 
 
 
-<!-- 여기부터 게시글 -->
-<div class="event_bar">
-    <div>
-    	<p>총 <em class="count">${totArticles}</em>개의 건강하고 맛있는 레시피가 등록되어 있습니다.</p>
-    </div>
-    <div class="wr_btn"><a href="${contextPath}/recipe/articleForm.do">글쓰기</a></div>
-</div>
+
+
+
+
+
+	<!-- 여기부터 게시글 -->
+	<div class="event_bar">
+		<div>
+			<p>
+				총 <em class="count">${totArticles}</em>개의 건강하고 맛있는 레시피가 등록되어 있습니다.
+			</p>
+		</div>
+
+
+		<div class="searchWrite">
+			<form action="${contextPath}/recipe/SearchBoardList_re.do"
+				method="post" />
+			<select name="searchCondition">
+				<option value="BOTH">제목+내용</option>
+				<option value="TITLE">제목</option>
+				<option value="CONTENT">내용</option>
+			</select> <input type="text" name="searchKeyword" /> <input type="submit"
+				value="검색" onclick="search_btn">
+			</form>
+			<p class="wr_btn">
+				<a href="${contextPath}/recipe/articleForm.do">글쓰기</a>
+			</p>
+
+		</div>
+
+	</div>
 
 
 <div class="recipyContent">
@@ -97,18 +122,26 @@ request.setCharacterEncoding("UTF-8");
             </p>
         </c:when>
 
-<c:when test="${articlesList !=null }">
-    <c:forEach var="article" items="${articlesList }" varStatus="articleNum">
+			<c:when test="${articlesList !=null }">
+				<c:forEach var="article" items="${articlesList }"
+					varStatus="articleNum">
 
 
-<div class="posting ">
-    <div class="photo"><img src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}"></div>
-    <div class="con">
+					<div class="posting ">
+						<div class="photo">
+							<a href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}"><img
+								src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}"></a>
+						</div>
+						<div class="con">
 
-        <div class="test">
-        <p class="Number">${article.articleNO}</p>
-        <p><a href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}" class="re_title">${article.title }</a></p>
-        </div>
+							<div class="test">
+								<p class="Number">${article.articleNO}</p>
+								<p>
+									<a
+										href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}"
+										class="re_title">${article.title }</a>
+								</p>
+							</div>
 
                 <div class="test2">
             <p>${article.id }</p>
@@ -122,7 +155,8 @@ request.setCharacterEncoding("UTF-8");
 </c:choose>
 
 
-</div><!-- 전체 라인 End-->
+	</div>
+	<!-- 전체 라인 End-->
 
 
 
@@ -185,6 +219,8 @@ request.setCharacterEncoding("UTF-8");
 			</c:if>
 		</div>
 	</div>
-		
-</body>
-</html>
+
+
+
+	<jsp:include page="../view/footer.jsp"></jsp:include>
+<html>

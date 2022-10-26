@@ -17,8 +17,11 @@ a{text-decoration:none;}
 .con01_title p:nth-child(4) a{ width: 100px; height: 25px; color:#333; display: block; border-bottom: 4px solid #858e9a; }
 
 .con01_recipe{width: 220px; height: 180px;float: left; margin-left: 16px;}
-.con01_img{width: 220px; height: 150px; background-color: #f8f8f8;  border-radius: 10px;}
+/* 최신글 썸네일 */
+.con01_img{width: 220px; height: 150px; background-color: #f8f8f8;  border-radius: 10px; box-sizing: border-box;}
+.con01_img img{width: 220px; height: 150px; object-fit: cover; border-radius: 10px; box-sizing: border-box;}
 .con01_recipe p{font-weight: 300; font-size: 15px; margin: 5px 8px;}
+.con01_recipe .title{height: 25px; overflow: hidden; text-overflow: ellipsis; display:block;  width:130x; white-space: nowrap;}
 
 .mainContent_02{background: #f3f3f3; height: 300px; margin-top: 70px;}
 .mainContent02_con{width: 1200px; height: 430px; margin: 0 auto; }
@@ -44,7 +47,7 @@ a{text-decoration:none;}
 .minRecipe p{float: left;  width:350px; font-size: 14px;} 
 
 
-/* 푸터 */
+/* 푸터 
 footer{ clear: both;
     background-color: #333; height: 150px; border-bottom: 5px solid #1a1a1a;}
 .footerDiv{width: 1200px; height: 150px; margin: 0 auto;}
@@ -52,5 +55,5 @@ footer{ clear: both;
 .f_left{width: 900px; height: 100px; margin-left: 30px; margin-top: 25px; float: left; background: url(../images/logo_f_etc.png) no-repeat right 15px;}
 .f_left b{color: #b8b8b8; line-height: 20px;}
 .f_left p{color: #b8b8b8; font-size: 13px; line-height: 25px;}
-
+*/
 
