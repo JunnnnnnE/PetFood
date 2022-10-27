@@ -1,0 +1,96 @@
+.recipyMenuBar{margin-bottom: 900px; position: relative; border: 1px solid #ccc; width: 1100px; 
+    height: 150px; margin: 0 auto; border-radius: 15px; box-sizing: border-box; margin:40px auto 0 auto;}
+
+.mainCategory{border-right: 1px solid #ccc; width: 115px; height: 148px; background-color: #f7f7f7;
+box-sizing: border-box; border-radius: 15px  0  0 15px; float: left; }
+.mainCategory ul{display:block; float: left; width: 115px; height: 148px;}
+.mainCategory >ul >li{line-height: 40px; float: left; width: 110px; margin-left:-27px;}
+.mainCategory >ul >li > a{text-align: center; width: 100px; height: 48px;  display: block;
+ line-height: 48px; color:#555;}
+.subCategory{float: left; width: 900px;}
+.sub1{display: block; }
+.sub1 li{float: left; height: 48px; line-height: 45px;}
+.sub1 li a{height: 48px; padding: 0 15px;  line-height: 45px;  color:#8b8989;  display: block;}
+.sub2{display: block; clear: both;}
+.sub2 li{float: left; height: 48px; line-height: 45px;}
+.sub2 li a{height: 48px; padding: 0 15px;  line-height: 45px;  color:#8b8989;  display: block;}
+.sub3{display: block; clear: both;}
+.sub3 li{float: left; height: 48px; line-height: 45px;}
+.sub3 li a{height: 48px; padding: 0 15px;  line-height: 45px;  color:#8b8989;  display: block;}
+
+
+
+
+.event_bar{margin-left: 60px; width: 1100px; height: 50px; clear: both; margin:0 auto; padding:20px 0;}
+.event_bar div p {float: left; height: 40px; }
+.event_bar div .count{margin-left:10px; font-size: 30px; height: 50px; font-weight: 700; color:#f17070;}
+
+/* 검색+글쓰기 */
+.searchWrite{width: 455px; height:50px; float:right; margin-top:5px;}
+
+.searchWrite select{font-size:13px; height:40px; width:80px; float:left;}
+.searchWrite input:nth-child(2){text-align:center; width:180px; height:40px; box-shadow: none; float:left; margin-left:5px;}
+.searchWrite input:nth-child(3){margin-left:5px; background:#ffce00; border: none; font-size: 16px; height:40px; width:80px; float:left; border-radius:10px;  display:block;}
+
+
+/* 글쓰기버튼 f17070 */
+.wr_btn{ text-align:center; width:100px; height:40px; background-color:#f17070; display:block; 
+ border-radius:10px; float: left; margin-left:5px;}
+.wr_btn a{width:100px; height:40px; line-height: 40px; font-size: 16px; font-weight: 700; color:#fff !important; display:block;}
+
+
+.recipyContent{
+	clear: both;   width: 1130px; margin: 0 auto; margin-bottom:80px;}
+
+.posting{float: left;  border: 1px solid #ccc;
+    width: 260px; height: 340px; border-radius: 15px;
+    overflow: hidden; margin: 10px 10px;}
+.posting:hover{ outline: 5px solid #ffce00; border-color:#ffce00;}
+.posting:hover .test2{background-color:#ffce00; color:#fff;}
+.posting:hover .test2 p{color:#fff;}
+.posting .photo{background-color: #555; width: 260px; height: 200px; overflow: hidden; }
+.posting .photo img{width: 260px; height: 200px; object-fit: cover;}
+.posting .con{width: 260px; height: 138px; padding-top: 20px;}
+.re_title{color: #333;}
+.Number::before {content: "No.";}
+
+.test{width: 200px; height: 70px; margin: 0 auto 10px auto; }
+.test p:nth-child(1){font-size: 13px;}
+.test p:nth-child(2){width: 200px; height: 40px; margin-top:-15px; 
+    overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;    
+     display: block; line-height: 22px;}
+
+.test2{border-top: 1px dashed #ccc; height: 38px; margin: 0 auto; width:260px;}
+.test2 p:first-child{float: left; line-height: 38px; font-size: 14px; color:#aaa; margin-left:25px;}
+.test2 p:last-child{float: right; font-size: 13px; line-height: 38px; color:#ccc; margin-right:25px;}
+
+
+
+.bottomPaging {
+	clear: both;
+	display: block;
+	width: 300px;
+	height: 180px;
+	margin: 0 auto;
+	margin-top: 80px;
+	text-align: center;
+	padding-top:5px;
+}
+
+.pagingMenu {
+	display: block;
+	height: 80x;
+	margin: 20px auto;
+
+	text-align: center;
+	padding: 20px;
+	height: 20px;
+	}
+
+.pagingMenu a {display:inline-block; width: 50px; height: 50px; font-size:20px; border-radius: 50%; line-height:50px;
+ background-color:#ffce00;  margin-right:10px; margin-top:-80px;}
+.sel-page{border:1px solid pink;}
