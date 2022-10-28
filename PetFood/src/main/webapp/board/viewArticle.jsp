@@ -109,7 +109,7 @@
 		      내용
 		   </td>
 		   <td>
-		    	<textarea rows="20" cols="60"  name="content"  id="i_content"  disabled >${article.content }</textarea>
+		    	<textarea rows="20" cols="120"  name="content"  id="i_content"  style= "resize : none;" disabled >${article.content }</textarea>
 		   </td>  
 		  </tr>
 		 
@@ -120,7 +120,7 @@
 		   </td>
 		   <td>
 		     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		     <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  /><br>
+		     <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  width="300px" height="300px"/><br>
 		       
 		   </td>   
 		  </tr>  
@@ -141,12 +141,15 @@
 			    <input type="hidden" name="count" value="${article.count}"  />
 		   </td>
 		  </tr>
+		  
+		  <c:if test="${article.id == user.userId }">
 		  <tr id="tr_btn_modify"  >
 			   <td colspan="2"   align="center" >
 			       <input type=button value="수정하기"   onClick="fn_modify_article(frmArticle)"  >
 		           <input type=button value="취소"  onClick="backToList(frmArticle)">
 			   </td>   
 		  </tr>
+		  </c:if>
 		    
 		  <tr  id="tr_btn">
 		   <td colspan=2 align="center">

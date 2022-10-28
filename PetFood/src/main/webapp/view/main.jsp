@@ -85,10 +85,11 @@
 				<a href="${contextPath}/recipe/viewArticle.do?articleNO=${recipe.articleNO}"
 					display=block>
 					<div class="con01_img">
-						<img src="../assets/images/09.svg" width="220" height="150"
-							alt="#">
+						<input type="hidden" name="originalFileName" value="${recipe.imageFileName }" /> 
+						<img src="${contextPath}/download2.do?articleNO=${recipe.articleNO}&imageFileName=${recipe.imageFileName}"
+							id="preview" width="220" height="150" /> 
 					</div>
-					<p>${recipe.title }</p>
+					<p class="title"> ${recipe.title }</p>
 				</a>
 			</div>
 		</c:forEach>

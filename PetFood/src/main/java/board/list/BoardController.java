@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
+
+import login.user.UserVO;
 
 
 @WebServlet("/PetFoodBoard/*")
@@ -54,17 +54,7 @@ public class BoardController extends HttpServlet {
 		System.out.println("action:" + action);
 		try {
 			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
-			if (action == null) {
-
-//          	  	HttpSession session = request.getSession();
-//
-//          	  	String a = (String)session.getAttribute("searchKeyword");
-//          	  	String b = (String)session.getAttribute("searchCondition");
-          	  	
-//          	  	System.out.println(a);
-//          	  	System.out.println(b);
-				
-				
+			if (action == null) {	
 				
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
@@ -78,11 +68,9 @@ public class BoardController extends HttpServlet {
 				articlesMap.put("pageNum", pageNum);
 				
 				request.setAttribute("articlesMap", articlesMap);
-				
-				
-//				articlesList = boardService.listArticles();
-//				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
+				
+				
 			} 
 			else if (action.equals("/listArticles.do")) {
 			
@@ -96,14 +84,11 @@ public class BoardController extends HttpServlet {
 				Map articlesMap=boardService.listArticles(pagingMap);
 				articlesMap.put("section", section);
 				articlesMap.put("pageNum", pageNum);				
-				
+
 				
 				request.setAttribute("articlesMap", articlesMap);
 				nextPage = "/board/listArticles.jsp";
 				
-//				articlesList = boardService.listArticles();
-//				request.setAttribute("articlesList", articlesList);
-//				nextPage = "/board/listArticles.jsp";
 			} 
 			else if (action.equals("/articleForm.do")) {
 				nextPage = "/board/articleForm.jsp";
@@ -114,8 +99,12 @@ public class BoardController extends HttpServlet {
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
+				
 
-				articleVO.setId("hong");
+          	  	HttpSession session = (HttpSession)request.getSession();
+          	  	UserVO user = (UserVO)session.getAttribute("user");
+          	  	System.out.println(user);
+				articleVO.setId(user.getUserId());
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
 				articleVO.setImageFileName(imageFileName);
@@ -129,7 +118,7 @@ public class BoardController extends HttpServlet {
 				}
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" 
-				         +"  alert('새글을 추가했습니다.');" 
+				         +"  alert('새글이 등록되었습니다');"
 						 +" location.href='"+request.getContextPath()
 						 +"/PetFoodBoard/listArticles.do';"
 				         +"</script>");
@@ -145,10 +134,12 @@ public class BoardController extends HttpServlet {
 				Map<String, String> articleMap = upload(request, response);
 				int articleNO = Integer.parseInt(articleMap.get("articleNO"));
 				articleVO.setArticleNO(articleNO);
+				String id = articleMap.get("id");
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
-				articleVO.setId("hong");
+//				articleVO.setId("hong");
+				articleVO.setId(id);
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
 				articleVO.setImageFileName(imageFileName);

@@ -10,7 +10,7 @@
 
   try{
 	 String jdbcUrl = "jdbc:mariadb://127.0.0.1:3306/petfood";
-     String dbId = "root";
+     String dbId = "petfood";
      String dbPass = "12345";
 	
 	 Class.forName("org.mariadb.jdbc.Driver");

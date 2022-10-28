@@ -14,23 +14,25 @@ height: 50px; border-top: 5px solid #333;}
 .h_topBar{height: 120px; width: 1200px; margin: 0 auto; position: relative; }
 
 
-nav{width: 1200px; height: 120px; margin: 0 auto;}
+nav{width: 1200px; height: 120px; margin: 0 auto; }
 #logo{position: absolute; top: 20px; left: 500px;}
 
-.h_topQuickMenu{ width: 230px; float: right;}
-.h_topQuickMenu ul{display: block; }
+.h_topQuickMenu{float: right; margin-right:30px; width:300px;}
+.h_topQuickMenu ul{float: right; display: block; }
 .h_topQuickMenu ul li{ float: left; text-align: center; box-sizing: border-box; background: url(../images/bar01.jpg) no-repeat right center;}
 .h_topQuickMenu ul li:last-child{ background:none;}
 .h_topQuickMenu ul li a{color: #333; font-size: 13px; padding: 5px 10px;}
+.userName{display:block; font-size:15px; font-weight: 500; line-height:27px;}
 
-.menu{display: block; clear: both; height: 60px;   width: 1200px; position: absolute; bottom: 0px;}
+
+.menu{display: block; clear: both; height: 60px;  width: 1200px; position: absolute; bottom: 0px; }
 .menu li:first-child{border-left: none;}
 .menu li {float: left; text-align: center; padding: 0 12px; height: 60px; line-height: 15px; }
 .menu li a{color: #4d4d4d; line-height: 60px; height: 60px; font-size: 18px; font-weight: 500;}
 
 .h_right{width: 295px; height: 43px; position: absolute; right: 0px; bottom: 8px;}
 
-.h_search{width: 250px; height: 47px; float: right;}
+.h_search{width: 250px; height: 47px; float: right; margin-right:20px;}
 
 .s_input{  
   position: relative;
@@ -45,8 +47,8 @@ nav{width: 1200px; height: 120px; margin: 0 auto;}
   position:absolute;
   width: 45px !important;
   height: 45px !important;
-  border: 1px solid red;
-  right:0px;
+ 
+  right:30px;
   top:0;
   float: left;
   display: block;

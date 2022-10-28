@@ -146,7 +146,7 @@ public class BoardDAO {
 		return 0;
 	}
 
-	public int insertNewArticle(ArticleVO article) {
+	public int insertNewArticle(board.recipe.ArticleVO article) {
 		int articleNO = getNewArticleNO();
 		try {
 			conn = dataFactory.getConnection();
@@ -173,8 +173,8 @@ public class BoardDAO {
 		return articleNO;
 	}
 
-	public ArticleVO selectArticle(int articleNO) {
-		ArticleVO article = new ArticleVO();
+	public board.recipe.ArticleVO selectArticle(int articleNO) {
+		board.recipe.ArticleVO article = new ArticleVO();
 		try {
 			conn = dataFactory.getConnection();
 			String query = "select articleNO,title,content, imageFileName,id,writeDate" + " from t_recipe_board"
@@ -355,6 +355,60 @@ public class BoardDAO {
 		return articlesList;
 	}
 
+	
+	
+	
+	/* 검색 */
+	public List<ArticleVO> searchArticlesRecipe(String search, String searchtype) { // searchtype : TITLE/CONTENT/BOTH
+		List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+		try {
+			conn = dataFactory.getConnection();
+
+			
+			
+			String query ="SELECT * from t_recipe_board WHERE ";
+			if (searchtype.equals("TITLE")) {
+				query += " title like'%" + search + "%'";
+			}
+			else if (searchtype.equals("CONTENT")) {
+				query += " content like'%" + search + "%'";				
+			}
+			else if (searchtype.equals("BOTH")) {
+				query += " title like'%" + search + "%' or content like" + "'%" + search + "%'";				
+			}
+			
+			System.out.println(query);
+			pstmt = conn.prepareStatement(query);
+
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int articleNO = rs.getInt("articleNO");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String id = rs.getString("id");
+				String imagefilename = rs.getString("imageFileName");
+				Date writeDate = rs.getDate("writeDate");
+				ArticleVO article = new ArticleVO();
+				article.setArticleNO(articleNO);
+				article.setTitle(title);
+				article.setContent(content);
+				article.setId(id);
+				article.setImageFileName(imagefilename);
+				article.setWriteDate(writeDate);
+				articlesList.add(article);
+			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return articlesList;
+	}
+	
+	
+	
+	
 	
 	
 	

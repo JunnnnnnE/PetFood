@@ -16,20 +16,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
 
+import login.user.UserVO;
 
 @WebServlet("/recipe/*")
 public class BoardController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static String ARTICLE_IMAGE_REPO = "C:\\board\\recipe_image";
-	BoardService boardService;
-	ArticleVO articleVO;
+	board.recipe.BoardService boardService;
+	board.recipe.ArticleVO articleVO;
 
 
 	public void init(ServletConfig config) throws ServletException {
@@ -54,7 +56,7 @@ public class BoardController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("action:" + action);
 		try {
-			//List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
+			List<board.recipe.ArticleVO> articlesList = new ArrayList<board.recipe.ArticleVO>();
 			if (action == null) {	
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
@@ -67,8 +69,9 @@ public class BoardController extends HttpServlet {
 				articlesMap.put("section", section);
 				articlesMap.put("pageNum", pageNum);
 				
-				request.setAttribute("articlesMap", articlesMap);
+				request.setAttribute("articlesMap", articlesMap);				
 				nextPage = "/board/re_listArticles.jsp";
+
 				
 			} else if (action.equals("/listArticles.do")) {
 			
@@ -98,7 +101,10 @@ public class BoardController extends HttpServlet {
 				String imageFileName = articleMap.get("imageFileName");
 				
 
-				articleVO.setId("testuser");
+          	  	HttpSession session = (HttpSession)request.getSession();
+          	  	UserVO user = (UserVO)session.getAttribute("user");
+          	  	System.out.println(user);
+				articleVO.setId(user.getUserId());
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
 				articleVO.setImageFileName(imageFileName);
@@ -173,9 +179,45 @@ public class BoardController extends HttpServlet {
 				
 				request.setAttribute("recipeArticles", vo);
 				nextPage = "/view/main.jsp";
+			
 				
 				
+				/* 검색 */
+			} else if (action.equals("/SearchBoardList_re.do")) {
+
+          	  	HttpSession session = request.getSession();
+          	  	
+				String search = request.getParameter("searchKeyword");
+				String searchType = "";
+				if (request.getParameter("serachCondition") != null ) {
+					searchType = request.getParameter("searchCondition");	// BOTH, TITLE, CONTENT
+				}
+				else {
+					searchType = "BOTH";
+				}
+
+          	  	session.setAttribute("searchKeyword", search);
+          	  	session.setAttribute("searchCondition", searchType);
+          	  	
+				System.out.println(search);
+				System.out.println(searchType);
+
+				articlesList = boardService.SearchArticles(search, searchType);
+
+				Map articlesMap = new HashMap();
+
+				articlesMap.put("articlesList", articlesList);
+				
+				request.setAttribute("articlesMap", articlesMap);
+				
+				nextPage = "/board/re_listArticles.jsp";
+
 			}
+			
+			
+			
+			
+			
 			
 			
 			
