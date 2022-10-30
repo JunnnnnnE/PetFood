@@ -1,4 +1,4 @@
-# 개밥멍선생 🐕 JSP TEAM PROJECT <img src="https://img.shields.io/badge/JSP-007396?style=flat-square&logo=Java&logoColor=white"> <img src="https://img.shields.io/badge/MariaDB-1F305F?style=flat-square&logo=MariaDB&logoColor=white">
+# 개밥멍선생 🐕 JSP TEAM PROJECT <img src="https://img.shields.io/badge/JSP-EF2D5E?style=flat-square&logo=Java&logoColor=white">
 
 
  `#JSP`와 `#MariaDB`를 이용하여 만든 **반려동물 레시피 공유 웹사이트**  
@@ -16,12 +16,21 @@
 - 서비스 타겟 : 펫푸드에 관심이 많은 20~30대.
 <br>
 
-## 💡 개발환경 및 기술 세부스택
-개발환경
+## 💡 개발환경 및 기술 세부스택 
+<img src="https://camo.githubusercontent.com/a0f9c9f1295e65f8c081e5e6073840e309726163c310542f8c0acb5aa60ba5ad/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4a4156412d3030373339363f7374796c653d666f722d7468652d6261646765266c6f676f3d6a617661266c6f676f436f6c6f723d7768697465"> <img src="https://img.shields.io/badge/Eclipse IDE-2C2255?style=for-the-badge&logo=Eclipse IDE&logoColor=white"> <img src="https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=white"> <img src="https://img.shields.io/badge/Apache Tomcat-F8DC75?style=for-the-badge&logo=Apache Tomcat&logoColor=black"> <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white"><br>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+<img src="https://img.shields.io/badge/JSS-F7DF1E?style=for-the-badge&logo=JSS&logoColor=black">
+<img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white">
+- JAVA 11
 - Eclips 
-- Java 11
-- MariaDB
+- MariaDB 10.0.1
+- Tomcat 9
+- AWS 
+
+
 <br>
+
 
 ## 🙋‍♂️🙋 1조각조각 Team Player
 - 박효준 : 커뮤니티 게시판, Git&Branch 관리🧵
