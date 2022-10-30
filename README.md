@@ -38,7 +38,17 @@
 - 원종인 : 로그인, 아이디/비밀번호 찾기, PPT
 - 허서영 : 레시피 게시판, 프론트 전반
 <img src="http://hohk.dothome.co.kr/load/data/kt180401/166713351449467808.png">
-(진행중. 마무리 후 추가예정)
+
+<br>
+
+
+
+## 📌 다이어그램(Diagrram) <img src="https://img.shields.io/badge/new-ffce66?style=flat&logo=java&logoColor=white">
+- 유스케이스
+- 클래스다이어그램
+- 시퀀스다이어그램
+- 하나 또 뭐였지
+
 
 <br>
 아직 수정중
