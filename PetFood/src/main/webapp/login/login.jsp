@@ -114,9 +114,10 @@ a {text-decoration : none; color : #333333; font: normal 12px/1.5em Arial, sans-
 
 #s_btn1{
     border: none;
-     background-color: #b7d5f4;
+     /* background-color: #b7d5f4; */
+     background-color: #ffce00; 
     border-radius: 30px;
-    color: #fff;
+    color: #333333;
     z-index: 1;
     transition: all 0.3s;
 }
@@ -124,7 +125,7 @@ a {text-decoration : none; color : #333333; font: normal 12px/1.5em Arial, sans-
 #s_btn1:hover{
     border: 1px solid #b7d5f4;
 
-    color: #b7d5f4;
+    color: #333333;
     border-radius: 30px;
     background: #fff;
     letter-spacing: 3px;

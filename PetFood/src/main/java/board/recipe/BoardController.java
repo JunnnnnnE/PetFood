@@ -175,7 +175,7 @@ public class BoardController extends HttpServlet {
 				
 				System.out.println("삭제됨");
 				PrintWriter pw = response.getWriter();
-				pw.print("<script>" + "  alert('삭제햇다');" + " location.href='" + request.getContextPath()
+				pw.print("<script>" + "  alert('글을 삭제했습니다.');" + " location.href='" + request.getContextPath()
 				+ "/recipe/listArticles.do';" + "</script>");
 				return;
 			} else if (action.equals("/setMainPage.do")) {

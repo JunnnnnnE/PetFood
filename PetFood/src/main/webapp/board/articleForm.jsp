@@ -11,6 +11,7 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <head>
+<jsp:include page="../view/header.jsp"></jsp:include>
 <meta charset="UTF-8">
 
 <style>
@@ -154,5 +155,5 @@
 			</table>
 		</form>
 	</div>
-</body>
+<jsp:include page="../view/footer.jsp"></jsp:include>
 </html>

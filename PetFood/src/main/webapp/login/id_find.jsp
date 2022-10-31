@@ -6,7 +6,37 @@
 <meta charset="UTF-8">
 <title>ID 찾기</title>
 </head>
-<body>
+<jsp:include page="../view/header.jsp"></jsp:include>
+<style>
+#wrap {
+	width : 100%;
+	height : 100%;
+	margin : auto auto;
+	padding : 100px;
+}
+
+.find {
+
+	width : 500px;
+	margin : 0 auto;
+	margin-bottom : 50px;
+	border-top : 1px solid black;
+	padding : 30px;
+	/* margin-left : auto;
+	margin-right : auto; */
+}
+
+label {
+	width : 50px;
+}
+
+.findItem {
+	margin-top : 5px;
+}
+.btn input{
+	width : 150px;
+}
+</style>
 <script type="text/javascript">
 	function id_search() { 
  		var frm = document.idfindscreen;
@@ -35,55 +65,60 @@
 	frm.submit();
 	}
 </script>
+
+<div id = "wrap">
 <form action="${contextPath}LoginController/idFind.do" name="idfindscreen" method = "POST">
-	<div class = "search-title">
-		<h3>ID 찾기</h3>
-	</div>
-		<section class = "form-search">
-			<div class = "find-name">
-				<label>이름</label>
-				<input type="text" name="user_Name" class = "btn-name" placeholder = "본인 이름">
-			<br>
-			</div>
-			<div class = "find-Email">
-				<label>Email</label>
-				<input type="text" name="user_Email" class = "btn-Email" placeholder = "가입당시 입력했던 Email">
-			</div>
-			<br>
-		</section>
-	<div class ="btnSearch">
-		<input type="button" name="enter" value="찾기"  onClick="id_search()">
-		<input type="button" name="cancel" value="취소" onClick="history.back()">
+	<div class = "find">
+		<div class = "search-title">
+			<h3>ID 찾기</h3>
+		</div>
+			<section class = "form-search">
+				<div class = "findItem">
+					<label>이름</label>
+					<input type="text" name="user_Name" class = "btn-name" placeholder = "본인 이름">
+				<br>
+				</div>
+				<div class = "findItem">
+					<label>Email</label>
+					<input type="text" name="user_Email" class = "btn-Email" placeholder = "가입당시 입력했던 Email">
+				</div>
+			</section>
+		<div class ="btn">
+			<input type="button" name="enter" value="찾기"  onClick="id_search()">
+			<input type="button" name="cancel" value="취소" onClick="history.back()">
+	 	</div>
  	</div>
  </form>
  
  
  
  <form action="${contextPath}/LoginController/pwFind.do" name="pwfindscreen" method = "POST">
-	<div class = "search-title">
-		<h3>PW 찾기</h3>
-	</div>
-		<section class = "form-search">
-			<div class = "find-id">
-				<label>ID</label>
-				<input type="text" name="user_Id" class = "btn-id" placeholder = "아이디">
-			<br>
-			</div>
-			<div class = "find-name">
-				<label>이름</label>
-				<input type="text" name="user_Name" class = "btn-name" placeholder = "본인 이름">
-			<br>
-			</div>
-			<div class = "find-Email">
-				<label>Email</label>
-				<input type="text" name="user_Email" class = "btn-Email" placeholder = "가입당시 입력했던 Email">
-			</div>
-			<br>
-		</section>
-	<div class ="btnSearch">
-		<input type="button" name="enter" value="찾기"  onClick="pw_search()">
-		<input type="button" name="cancel" value="취소" onClick="history.back()">
+	<div class = "find" id = "findPw">
+		<div class = "search-title">
+			<h3>PW 찾기</h3>
+		</div>
+			<section class = "form-search">
+				<div class = "findItem">
+					<label>ID</label>
+					<input type="text" name="user_Id" class = "btn-id" placeholder = "아이디">
+				<br>
+				</div>
+				<div class = "findItem">
+					<label>이름</label>
+					<input type="text" name="user_Name" class = "btn-name" placeholder = "본인 이름">
+				<br>
+				</div>
+				<div class = "findItem">
+					<label>Email</label>
+					<input type="text" name="user_Email" class = "btn-Email" placeholder = "가입당시 입력했던 Email">
+				</div>
+			</section>
+		<div class ="btn">
+			<input type="button" name="enter" value="찾기"  onClick="pw_search()">
+			<input type="button" name="cancel" value="취소" onClick="history.back()">
+	 	</div>
  	</div>
  </form>
-</body>
+</div>
+<jsp:include page="../view/footer.jsp"></jsp:include>
 </html>
