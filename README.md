@@ -44,10 +44,48 @@
 
 
 ## 📌 다이어그램(Diagrram) <img src="https://img.shields.io/badge/new-ffce66?style=flat&logo=java&logoColor=white">
-- 유스케이스
-- 클래스다이어그램
-- 시퀀스다이어그램
-- 하나 또 뭐였지
+<details>
+<summary>유스케이스</summary>
+<div markdown="1">
+<img src="http://hohk.dothome.co.kr/upload/use.png">
+</div>
+</details>
+
+<details>
+<summary>클래스 다이어그램</summary>
+<div markdown="1">
+<img src="http://hohk.dothome.co.kr/upload/class.png">
+</div>
+</details>
+
+<details>
+<summary>시퀀스다이어그램</summary>
+<div markdown="1">
+- 로그인
+<img src="http://hohk.dothome.co.kr/upload/s1.png">
+
+<br>
+
+- 회원가입
+<img src="http://hohk.dothome.co.kr/upload/s2.png">
+
+<br>
+
+- 게시판
+<img src="http://hohk.dothome.co.kr/upload/s3.png">
+
+</div>
+</details>
+
+<details>
+<summary>ERD</summary>
+<div markdown="1">
+
+<img src="http://hohk.dothome.co.kr/upload/ERD.png">
+</div>
+</details>
+
+
 
 
 <br>
