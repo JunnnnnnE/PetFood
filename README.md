@@ -25,8 +25,8 @@
 - JAVA 11
 - Eclips 
 - MariaDB 10.0.1
-- Tomcat 9
-- AWS 
+- Apache Tomcat 9
+- AWS Cloud
 
 
 <br>
