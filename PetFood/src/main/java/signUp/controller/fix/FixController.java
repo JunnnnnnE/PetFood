@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import login.user.UserVO;
 import login.user.impl.UserDAO;
 
-@WebServlet("/FixController")
+@WebServlet("/FixController/*")
 public class FixController extends HttpServlet {
    private static final long serialVersionUID = 1L;
 
@@ -34,9 +34,11 @@ public class FixController extends HttpServlet {
             String uri = request.getRequestURI();
             String path = uri.substring(uri.lastIndexOf("/"));
             System.out.println(path);
+            HttpSession session = request.getSession();
                            
                //1. 사용자 입력 정보 추출
-               String userId = request.getParameter("userId");
+               UserVO user = (UserVO)session.getAttribute("user");
+               String userId = user.getUserId();
 	   
                //2. DB연동 처리
                FixVO vo = new FixVO();
@@ -45,14 +47,13 @@ public class FixController extends HttpServlet {
                FixDAO fixDAO = new FixDAO();
                FixVO fix = fixDAO.getFix(vo);
                
-               HttpSession session = request.getSession();
                session.setAttribute("fix", fix);
 
          } catch (Exception e) {
             e.printStackTrace();
          }
 
-      response.sendRedirect("../userFix.jsp");
+      response.sendRedirect("../PetFood/userFix.jsp");
    }
 
 }

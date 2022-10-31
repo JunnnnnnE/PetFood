@@ -22,7 +22,7 @@
         .board_write_table{width: 100%; padding: 10px; border-collapse: collapse; border-top: 2px solid #555; border-bottom: 2px solid #555;}
         .board_write_table td{padding: 10px 0; line-height: 40px; height: 40px;}
         .board_write_table tr{border-bottom: 1px solid #ccc;}
-        .board_write_table tr>td:nth-child(1){width: 150px;}
+        .board_write_table tr>td:nth-child(1){width: 250px;}
         .board_write_table tr>td input{ border: 1px solid #ccc; width: 100%; height: 40px; line-height: 40px;}
         .board_write_table .txt_area{width: 100%; height: 300px; border: 1px solid #ccc; resize: none;}
         

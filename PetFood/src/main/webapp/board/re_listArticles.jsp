@@ -14,6 +14,9 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="../view/header.jsp"></jsp:include>
@@ -132,8 +135,11 @@ request.setCharacterEncoding("UTF-8");
 					<div class="posting ">
 						<div class="photo">
 							<a
-								href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}"><img
-								src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}"></a>
+								href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}">
+								<img src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}">								
+								</a>						
+										 
+								 
 						</div>
 						<div class="con">
 

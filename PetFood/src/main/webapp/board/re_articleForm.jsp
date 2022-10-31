@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File" %>
+<%@ page import="java.util.Enumeration" %>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ page import="com.oreilly.servlet.MultipartRequest"%>
 <%
 request.setCharacterEncoding("UTF-8");
 %>
@@ -31,9 +35,7 @@ request.setCharacterEncoding("UTF-8");
 
 
 	<div class="contentRecipe_w">
-		<form name="articleForm" method="post"
-			action="${contextPath}/recipe/addArticle.do"
-			enctype="multipart/form-data">
+		<form name="articleForm" method="post" action="${contextPath}/recipe/addArticle.do"	 enctype="multipart/form-data">
 
 			<p>나만의 멋진 레시피를 작성해주세요. ex) 강아지도 좋아하는 건강식~</p>
 			<input type="text" size="67" maxlength="500" name="title"

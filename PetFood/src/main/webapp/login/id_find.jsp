@@ -17,7 +17,7 @@
 	 	}
 
 	frm.method = "post";
-	frm.action = "LoginController/idFind.do"; //넘어간화면
+	frm.action = "../LoginController/idFind.do"; //넘어간화면
 	frm.submit();
 	}
 </script>
@@ -31,11 +31,11 @@
 	 	}
 
 	frm.method = "post";
-	frm.action = "LoginController/pwFind.do"; //넘어간화면
+	frm.action = "../LoginController/pwFind.do"; //넘어간화면
 	frm.submit();
 	}
 </script>
-<form action="${contextPath}/LoginController/idFind.do" name="idfindscreen" method = "POST">
+<form action="${contextPath}LoginController/idFind.do" name="idfindscreen" method = "POST">
 	<div class = "search-title">
 		<h3>ID 찾기</h3>
 	</div>

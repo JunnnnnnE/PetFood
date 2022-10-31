@@ -58,16 +58,16 @@
 <!-- 컨텐츠01 -->
 <div class="mainContent">
 	<ul class="mainTopIcon">
-		<li><a href=""><img src="../assets/images/01.svg" alt=""><br>저키/트릿</a></li>
+		<li><a href=""><img src="../assets/images/01.svg" alt=""><br>껌</a></li>
 		<li><a href=""><img src="../assets/images/02.svg" alt=""><br>비스켓</a></li>
-		<li><a href=""><img src="../assets/images/03.svg" alt=""><br>소시지</a></li>
-		<li><a href=""><img src="../assets/images/04.svg" alt=""><br>건조</a></li>
-		<li><a href=""><img src="../assets/images/05.svg" alt=""><br>음료</a></li>
-		<li><a href=""><img src="../assets/images/06.svg" alt=""><br>시리얼</a></li>
-		<li><a href=""><img src="../assets/images/07.svg" alt=""><br>수제간식</a></li>
-		<li><a href=""><img src="../assets/images/08.svg" alt=""><br>아몰라</a></li>
-		<li><a href=""><img src="../assets/images/09.svg" alt=""><br>뭐써야돼</a></li>
-		<li><a href=""><img src="../assets/images/09.svg" alt=""><br>메뉴하나더</a></li>
+		<li><a href=""><img src="../assets/images/03.svg" alt=""><br>건조</a></li>
+		<li><a href=""><img src="../assets/images/04.svg" alt=""><br>음료</a></li>
+		<li><a href=""><img src="../assets/images/05.svg" alt=""><br>간편식</a></li>
+		<li><a href=""><img src="../assets/images/06.svg" alt=""><br>저키</a></li>
+		<li><a href=""><img src="../assets/images/07.svg" alt=""><br>생식</a></li>
+		<li><a href=""><img src="../assets/images/08.svg" alt=""><br>소시지</a></li>
+		<li><a href=""><img src="../assets/images/09.svg" alt=""><br>영양식</a></li>
+		<li><a href=""><img src="../assets/images/10.svg" alt=""><br>이유식</a></li>
 	</ul>
 
 	<div class="mainContent_01">
