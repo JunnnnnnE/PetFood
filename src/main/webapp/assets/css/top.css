@@ -1,0 +1,62 @@
+@charset "utf-8";
+
+a{text-decoration:none !important; color:#333 !important;}
+header{border-bottom: 1px solid #ccc; height: 180px;}
+
+.h_topBanner {background-color: #ffce00;
+height: 50px; border-top: 5px solid #333;}
+.h_topBanner p {font-size: 18px; text-align: center; color:#120707;
+ width: 1200px; margin: 0 auto; height: 48px; line-height: 50px; position:relative;}
+.h_topBanner span {font-weight: 800; font-size: 19px}
+
+.h_topBanner .top_img:first-child{position: absolute; top:10px; left: 250px;}
+.h_topBanner .top_img:last-child {position: absolute; top:15px; right: 260px;}
+.h_topBar{height: 120px; width: 1200px; margin: 0 auto; position: relative; }
+
+
+nav{width: 1200px; height: 120px; margin: 0 auto; }
+#logo{position: absolute; top: 20px; left: 500px;}
+
+.h_topQuickMenu{float: right; margin-right:30px; width:300px;}
+.h_topQuickMenu ul{float: right; display: block; }
+.h_topQuickMenu ul li{ float: left; text-align: center; box-sizing: border-box; background: url(../images/bar01.jpg) no-repeat right center;}
+.h_topQuickMenu ul li:last-child{ background:none;}
+.h_topQuickMenu ul li a{color: #333; font-size: 13px; padding: 5px 10px;}
+.userName{display:block; font-size:15px; font-weight: 500; line-height:27px;}
+
+
+.menu{display: block; clear: both; height: 60px;  width: 1200px; position: absolute; bottom: 0px; }
+.menu li:first-child{border-left: none;}
+.menu li {float: left; text-align: center; padding: 0 12px; height: 60px; line-height: 15px; }
+.menu li a{color: #4d4d4d; line-height: 60px; height: 60px; font-size: 18px; font-weight: 500;}
+
+.h_right{width: 295px; height: 43px; position: absolute; right: 0px; bottom: 8px;}
+
+.h_search{width: 250px; height: 47px; float: right; margin-right:20px;}
+
+.s_input{  
+  position: relative;
+  height: 45px;
+  width: 220px;
+  border:3px solid #ffce00;
+  border-radius: 15px;
+  padding: 10px 12px;
+  font-size: 14px;}
+
+.s_btn {
+  position:absolute;
+  width: 45px !important;
+  height: 45px !important;
+ 
+  right:30px;
+  top:0;
+  float: left;
+  display: block;
+  background: url(../images/icon_search.png) no-repeat center center;
+  background-color: #ffce00;
+  border: none;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 0 15px 15px 0;  
+}
+

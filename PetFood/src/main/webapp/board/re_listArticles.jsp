@@ -14,6 +14,9 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+
+
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="../view/header.jsp"></jsp:include>
@@ -47,8 +50,7 @@ request.setCharacterEncoding("UTF-8");
 				<li><a href="#">당근</a></li>
 				<li><a href="#">쌀/곡류</a></li>
 				<li><a href="#">브로콜리</a></li>
-				<li><a href="#">계란</a></li>
-				<li><a href="#">사과</a></li>
+
 			</ul>
 
 
@@ -70,72 +72,113 @@ request.setCharacterEncoding("UTF-8");
 				<li><a href="#">소화기관</a></li>
 				<li><a href="#">알러지</a></li>
 			</ul>
-			<div class="etcMenu">
-				<a href="#">이번주 추천 레시피 보러가기</a>
-			</div>
+
 		</div>
-		<!-- 상단 대분류/중분류 메뉴 끝 -->
+	</div>
+	<!-- 상단 대분류/중분류 메뉴 끝 -->
 
 
-
-<!-- 여기부터 게시글 -->
-<div class="event_bar">
-    <div>
-    	<p>총 <em class="count">${totArticles}</em>개의 건강하고 맛있는 레시피가 등록되어 있습니다.</p>
-    </div>
-    <div class="wr_btn"><a href="${contextPath}/recipe/articleForm.do">글쓰기</a></div>
-</div>
-
-
-<div class="recipyContent">
-
-    <c:choose>
-
-        <c:when test="${articlesList ==null }">
-            <p align="center">
-                <b>등록된 글이 없습니다.</b>
-            </p>
-        </c:when>
-
-<c:when test="${articlesList !=null }">
-    <c:forEach var="article" items="${articlesList }" varStatus="articleNum">
-
-
-<div class="posting ">
-    <div class="photo"><img src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}"></div>
-    <div class="con">
-
-        <div class="test">
-        <p class="Number">${article.articleNO}</p>
-        <p><a href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}" class="re_title">${article.title }</a></p>
-        </div>
-
-                <div class="test2">
-            <p>${article.id }</p>
-            <p>${article.writeDate}</p>
-            </div>
-    </div>
-</div>
-
-</c:forEach>
-</c:when>
-</c:choose>
-
-
-</div><!-- 전체 라인 End-->
+	<!-- 검색 -->
 
 
 
 
 
 
-		<!-- 하단 글 갯수 리스트 -->
+
+
+	<!-- 여기부터 게시글 -->
+	<div class="event_bar">
+		<div>
+			<p>
+				총 <em class="count">${totArticles}</em>개의 건강하고 맛있는 레시피가 등록되어 있습니다.
+			</p>
+		</div>
+
+
+		<div class="searchWrite">
+			<form action="${contextPath}/recipe/SearchBoardList_re.do"
+				method="post" />
+			<select name="searchCondition">
+				<option value="BOTH">제목+내용</option>
+				<option value="TITLE">제목</option>
+				<option value="CONTENT">내용</option>
+			</select> <input type="text" name="searchKeyword" /> <input type="submit"
+				value="검색" onclick="search_btn">
+			</form>
+			<c:if test="${user.userName != null}">
+				<p class="wr_btn">
+					<a href="${contextPath}/recipe/articleForm.do">글쓰기</a>
+				</p>
+			</c:if>
+
+		</div>
+
+	</div>
+
+
+	<div class="recipyContent">
+
+		<c:choose>
+
+			<c:when test="${articlesList ==null }">
+				<p align="center">
+					<b>등록된 글이 없습니다.</b>
+				</p>
+			</c:when>
+
+			<c:when test="${articlesList !=null }">
+				<c:forEach var="article" items="${articlesList }"
+					varStatus="articleNum">
+
+
+					<div class="posting ">
+						<div class="photo">
+							<a
+								href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}">
+								<img src="${contextPath}/download2.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}">								
+								</a>						
+										 
+								 
+						</div>
+						<div class="con">
+
+							<div class="test">
+								<p class="Number">${article.articleNO}</p>
+								<p>
+									<a
+										href="${contextPath}/recipe/viewArticle.do?articleNO=${article.articleNO}"
+										class="re_title">${article.title }</a>
+								</p>
+							</div>
+
+							<div class="test2">
+								<p>${article.id }</p>
+								<p>${article.writeDate}</p>
+							</div>
+						</div>
+					</div>
+
+				</c:forEach>
+			</c:when>
+		</c:choose>
+
+
+	</div>
+	<!-- 전체 라인 End-->
+
+
+
+
+
+
+	<!-- 하단 글 갯수 리스트 -->
 	<div class="bottomPaging">
 		<div class="pagingMenu">
 			<c:if test="${totArticles != null }">
 				<c:choose>
-				
-					<c:when test="${totArticles >100 }">					
+
+					<c:when test="${totArticles >100 }">
 						<!-- 글 개수가 100 초과인경우 -->
 						<c:forEach var="page" begin="1" end="10" step="1">
 							<c:if test="${section >1 && page==1 }">
@@ -153,17 +196,17 @@ request.setCharacterEncoding("UTF-8");
 							</c:if>
 						</c:forEach>
 					</c:when>
-					
-					
-					<c:when test="${totArticles ==100 }">					
+
+
+					<c:when test="${totArticles ==100 }">
 						<!--등록된 글 개수가 100개인경우  -->
 						<c:forEach var="page" begin="1" end="10" step="1">
 							<a class="no-uline" href="#">${page } </a>
 						</c:forEach>
 					</c:when>
 					<c:when test="${totArticles< 100 }">
-					
-					
+
+
 						<!--등록된 글 개수가 100개 미만인 경우  -->
 						<c:forEach var="page" begin="1" end="${totArticles/13 +1}"
 							step="1">
@@ -185,6 +228,8 @@ request.setCharacterEncoding("UTF-8");
 			</c:if>
 		</div>
 	</div>
-		
-</body>
-</html>
+
+
+
+	<jsp:include page="../view/footer.jsp"></jsp:include>
+<html>

@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,18 +19,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
+
+import login.user.UserVO;
 
 
 @WebServlet("/PetFoodBoard/*")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
 	BoardService boardService;
 	ArticleVO articleVO;
+	
 
 	public void init(ServletConfig config) throws ServletException {
 		boardService = new BoardService();
@@ -47,6 +48,9 @@ public class BoardController extends HttpServlet {
 	}
 
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext context= request.getSession().getServletContext();
+		String uploadPath = context.getRealPath("/save/board");		
+		
 		String nextPage = "";
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
@@ -54,17 +58,7 @@ public class BoardController extends HttpServlet {
 		System.out.println("action:" + action);
 		try {
 			List<ArticleVO> articlesList = new ArrayList<ArticleVO>();
-			if (action == null) {
-
-//          	  	HttpSession session = request.getSession();
-//
-//          	  	String a = (String)session.getAttribute("searchKeyword");
-//          	  	String b = (String)session.getAttribute("searchCondition");
-          	  	
-//          	  	System.out.println(a);
-//          	  	System.out.println(b);
-				
-				
+			if (action == null) {	
 				
 				String _section=request.getParameter("section");
 				String _pageNum=request.getParameter("pageNum");
@@ -78,11 +72,9 @@ public class BoardController extends HttpServlet {
 				articlesMap.put("pageNum", pageNum);
 				
 				request.setAttribute("articlesMap", articlesMap);
-				
-				
-//				articlesList = boardService.listArticles();
-//				request.setAttribute("articlesList", articlesList);
 				nextPage = "/board/listArticles.jsp";
+				
+				
 			} 
 			else if (action.equals("/listArticles.do")) {
 			
@@ -96,14 +88,11 @@ public class BoardController extends HttpServlet {
 				Map articlesMap=boardService.listArticles(pagingMap);
 				articlesMap.put("section", section);
 				articlesMap.put("pageNum", pageNum);				
-				
+
 				
 				request.setAttribute("articlesMap", articlesMap);
 				nextPage = "/board/listArticles.jsp";
 				
-//				articlesList = boardService.listArticles();
-//				request.setAttribute("articlesList", articlesList);
-//				nextPage = "/board/listArticles.jsp";
 			} 
 			else if (action.equals("/articleForm.do")) {
 				nextPage = "/board/articleForm.jsp";
@@ -114,22 +103,26 @@ public class BoardController extends HttpServlet {
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
+				
 
-				articleVO.setId("hong");
+          	  	HttpSession session = (HttpSession)request.getSession();
+          	  	UserVO user = (UserVO)session.getAttribute("user");
+          	  	System.out.println(user);
+				articleVO.setId(user.getUserId());
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
 				articleVO.setImageFileName(imageFileName);
 				articleNO = boardService.addArticle(articleVO);
 				
 				if (imageFileName != null && imageFileName.length() != 0) {
-					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+					File srcFile = new File(uploadPath + "/" + "temp" + "/" + imageFileName);
+					File destDir = new File(uploadPath + "/" + articleNO);
 					destDir.mkdirs();
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
 				}
 				PrintWriter pw = response.getWriter();
 				pw.print("<script>" 
-				         +"  alert('새글을 추가했습니다.');" 
+				         +"  alert('새글이 등록되었습니다');"
 						 +" location.href='"+request.getContextPath()
 						 +"/PetFoodBoard/listArticles.do';"
 				         +"</script>");
@@ -145,21 +138,23 @@ public class BoardController extends HttpServlet {
 				Map<String, String> articleMap = upload(request, response);
 				int articleNO = Integer.parseInt(articleMap.get("articleNO"));
 				articleVO.setArticleNO(articleNO);
+				String id = articleMap.get("id");
 				String title = articleMap.get("title");
 				String content = articleMap.get("content");
 				String imageFileName = articleMap.get("imageFileName");
-				articleVO.setId("hong");
+//				articleVO.setId("hong");
+				articleVO.setId(id);
 				articleVO.setTitle(title);
 				articleVO.setContent(content);
 				articleVO.setImageFileName(imageFileName);
 				boardService.modArticle(articleVO);
 				if (imageFileName != null && imageFileName.length() != 0) {
 					String originalFileName = articleMap.get("originalFileName");
-					File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+					File srcFile = new File(uploadPath + "/" + "temp" + "/" + imageFileName);
+					File destDir = new File(uploadPath + "/" + articleNO);
 					destDir.mkdirs();
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
-					File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
+					File oldFile = new File(uploadPath + "/" + articleNO + "/" + originalFileName);
 					oldFile.delete();
 				}
 				PrintWriter pw = response.getWriter();
@@ -171,7 +166,7 @@ public class BoardController extends HttpServlet {
 				int articleNO = Integer.parseInt(request.getParameter("articleNO"));
 				List<Integer> articleNOList = boardService.removeArticle(articleNO);
 				for (int _articleNO : articleNOList) {
-					File imgDir = new File(ARTICLE_IMAGE_REPO + "\\" + _articleNO);
+					File imgDir = new File(uploadPath + "/" + _articleNO);
 					if (imgDir.exists()) {
 						FileUtils.deleteDirectory(imgDir);
 					}
@@ -227,8 +222,11 @@ public class BoardController extends HttpServlet {
 
 	private Map<String, String> upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> articleMap = new HashMap<String, String>();
+		ServletContext context= request.getSession().getServletContext();
+		String uploadPath = context.getRealPath("/save/board");
 		String encoding = "utf-8";
-		File currentDirPath = new File(ARTICLE_IMAGE_REPO);
+		
+		File currentDirPath = new File(uploadPath);
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setRepository(currentDirPath);
 		factory.setSizeThreshold(1024 * 1024);
@@ -246,7 +244,7 @@ public class BoardController extends HttpServlet {
 					System.out.println("파일크기:" + fileItem.getSize() + "bytes");
 					//articleMap.put(fileItem.getFieldName(), fileItem.getName());
 					if (fileItem.getSize() > 0) {
-						int idx = fileItem.getName().lastIndexOf("\\");
+						int idx = fileItem.getName().lastIndexOf("/");
 						if (idx == -1) {
 							idx = fileItem.getName().lastIndexOf("/");
 						}
@@ -254,7 +252,7 @@ public class BoardController extends HttpServlet {
 						String fileName = fileItem.getName().substring(idx + 1);
 						System.out.println("파일명:" + fileName);
 						articleMap.put(fileItem.getFieldName(), fileName);  //익스플로러에서 업로드 파일의 경로 제거 후 map에 파일명 저장
-						File uploadFile = new File(currentDirPath + "\\temp\\" + fileName);
+						File uploadFile = new File(currentDirPath + "/temp/" + fileName);
 						fileItem.write(uploadFile);
 
 					} // end if

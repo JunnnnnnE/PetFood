@@ -15,7 +15,9 @@ public class UserDAO {
 	
 	//SQL 명령어들
 	private final String USER_GET = "select * from t_petfood_user where userId=? and userPwd=?";
-
+	private final String USER_FINDID = "select * from t_petfood_user where userName=? and userEmail=?";
+	private final String USER_FINDPW = "select * from t_petfood_user where userId=? and userName=? and userEmail=?";
+	
 	//CRUD 기능의 메소드 구현
 	//회원 등록
 	public UserVO getUser(UserVO vo) {
@@ -44,5 +46,63 @@ public class UserDAO {
 		}
 		return user;
 	}
-
+	
+	//아이디 찾기
+	public UserVO findUserId(UserVO vo) {
+		UserVO user = null;
+		try {
+			System.out.println("===> JDBC로 getUser() 기능처리");
+			conn = JDBCUtill.getConnection();			
+			stmt = conn.prepareStatement(USER_FINDID);
+			stmt.setString(1, vo.getUserName());
+			stmt.setString(2, vo.getUserEmail());
+			rs = stmt.executeQuery();
+			
+			if(rs.next()) {
+				user = new UserVO();
+				user.setUserId(rs.getString("userId"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtill.close(rs, stmt, conn);
+		}
+		return user;
+	}
+	
+	//비밀번호 찾기
+		public UserVO findUserPwd(UserVO vo) {
+			UserVO user = null;
+			try {
+				System.out.println("===> JDBC로 getUser() 기능처리");
+				conn = JDBCUtill.getConnection();			
+				stmt = conn.prepareStatement(USER_FINDPW);
+				stmt.setString(1, vo.getUserId());
+				stmt.setString(2, vo.getUserName());
+				stmt.setString(3, vo.getUserEmail());
+				rs = stmt.executeQuery();
+				
+				if(rs.next()) {
+					user = new UserVO();
+					user.setUserPwd(rs.getString("userPwd"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				JDBCUtill.close(rs, stmt, conn);
+			}
+			return user;
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
