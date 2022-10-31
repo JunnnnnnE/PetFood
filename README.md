@@ -43,7 +43,7 @@
 - 박건무 : 회원가입(유효성검사), 마이페이지
 - 원종인 : 로그인, 아이디/비밀번호 찾기, PPT
 - 허서영 : 레시피 게시판, 프론트 전반
-<img src="http://hohk.dothome.co.kr/load/data/kt180401/166713351449467808.png">
+<img src="http://hohk.dothome.co.kr/upload/git.png">
 
 <br>
 
